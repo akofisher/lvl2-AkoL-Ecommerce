@@ -4,7 +4,6 @@ import InputBase from '@material-ui/core/InputBase'
 import Typography from '@material-ui/core/Typography'
 import SearchIcon from '@material-ui/icons/Search'
 import FormControl from '@material-ui/core/FormControl'
-import { flexbox } from '@material-ui/system'
 
 const BootstrapInput = withStyles((theme) => ({
   root: {
@@ -52,6 +51,13 @@ const useStyles = makeStyles((theme) => ({
   PAD: {
     padding: '24px',
   },
+  FntSize: {
+    fontSize: '25px',
+    padding: '8px',
+  },
+  title: {
+    paddingBottom: '20px',
+  },
 }))
 
 export default function SearchInp() {
@@ -63,9 +69,10 @@ export default function SearchInp() {
         <Typography variant="h6" className={classes.title}>
           Filters
         </Typography>
-
-        <BootstrapInput defaultValue="Search..." id="bootstrap-input" />
-        <SearchIcon />
+        <div className={classes.root}>
+          <BootstrapInput defaultValue="Search..." id="bootstrap-input" />
+          <SearchIcon className={classes.FntSize} />
+        </div>
       </FormControl>
     </form>
   )
