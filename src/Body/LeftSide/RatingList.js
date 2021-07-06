@@ -35,13 +35,7 @@ export default function RatingList() {
         component="fieldset"
         borderColor="transparent"
       >
-        <Rating
-          name="simple-controlled"
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue)
-          }}
-        />
+        <Rating name="simple-controlled" value={value} />
         <Typography className={classes.FntSize} component="p">
           {' '}
           & UP
@@ -52,13 +46,7 @@ export default function RatingList() {
         component="fieldset"
         borderColor="transparent"
       >
-        <Rating
-          name="simple-controlled"
-          value={value - 1}
-          onChange={(event, newValue) => {
-            setValue(newValue)
-          }}
-        />
+        <Rating name="simple-controlled" value={value - 1} />
         <Typography className={classes.FntSize} component="p">
           {' '}
           & UP
@@ -69,13 +57,7 @@ export default function RatingList() {
         component="fieldset"
         borderColor="transparent"
       >
-        <Rating
-          name="simple-controlled"
-          value={value - 2}
-          onChange={(event, newValue) => {
-            setValue(newValue)
-          }}
-        />
+        <Rating name="simple-controlled" value={value - 2} />
         <Typography className={classes.FntSize} component="p">
           {' '}
           & UP
@@ -86,13 +68,7 @@ export default function RatingList() {
         component="fieldset"
         borderColor="transparent"
       >
-        <Rating
-          name="simple-controlled"
-          value={value - 3}
-          onChange={(event, newValue) => {
-            setValue(newValue)
-          }}
-        />
+        <Rating name="simple-controlled" value={value - 3} />
         <Typography className={classes.FntSize} component="p">
           {' '}
           & UP

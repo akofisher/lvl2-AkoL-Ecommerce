@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Box } from '@material-ui/core'
 import Header from './Header/Header'
 import Body from './Body/Body'
+import Social from './Footer/Social'
+import Informations from './Footer/Informations'
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -28,7 +30,8 @@ function App() {
       <Body />
 
       <Grid item xs={12}>
-        <Box className={classes.box}>3</Box>
+        <Social />
+        <Informations />
       </Grid>
     </Grid>
   )

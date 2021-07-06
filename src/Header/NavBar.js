@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
   bTn: {
     border: '2px solid white',
-    borderRadius: '30%',
+    borderRadius: '20px',
   },
 }))
 

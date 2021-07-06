@@ -8,8 +8,19 @@ import RadioList from './LeftSide/RadioList'
 import PriceSlider from './LeftSide/PriceSlider'
 import SizeList from './LeftSide/SizeList'
 import ColoredCheckbox from './LeftSide/ColoredCheckbox'
+import TopLabel from './RightSide/TopLabel'
+import { makeStyles } from '@material-ui/core'
+import FakeStore from './RightSide/FetchStore'
+
+const useStyles = makeStyles(() => ({
+  spaceBTW: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+}))
 
 export default function Body() {
+  const classes = useStyles()
   return (
     <Grid container xs={12}>
       <Grid item xs={4}>
@@ -22,8 +33,10 @@ export default function Body() {
         <SizeList />
         <ColoredCheckbox />
       </Grid>
-      <Grid item xs={8}>
-        4
+      <Grid item xs={8} className={classes.spaceBTW}>
+        <TopLabel />
+        <FakeStore />
+        <TopLabel />
       </Grid>
     </Grid>
   )

@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 200,
     backgroundColor: theme.palette.background.paper,
   },
   PAD: {
@@ -18,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
   FLEX: {
     display: 'flex',
+    flexWrap: 'wrap',
   },
 }))
 
@@ -61,6 +61,7 @@ export default function ColoredCheckbox() {
               dense
               button
               onClick={handleToggle(value)}
+              style={{ width: 'auto' }}
             >
               <Checkbox
                 edge="start"
