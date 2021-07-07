@@ -37,7 +37,7 @@ export default function FakeStore() {
   return (
     <React.Fragment>
       <Grid container className={classes.flexible}>
-        <Grid md={4}>
+        <Grid xs={12} md={4}>
           <Card className={classes.padd}>
             <CardActionArea>
               <CardMedia
@@ -56,7 +56,7 @@ export default function FakeStore() {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid md={4}>
+        <Grid xs={12} md={4}>
           <Card className={classes.padd}>
             <CardActionArea>
               <CardMedia
@@ -75,7 +75,7 @@ export default function FakeStore() {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid md={4}>
+        <Grid xs={12} md={4}>
           <Card className={classes.padd}>
             <CardActionArea>
               <CardMedia
@@ -94,7 +94,7 @@ export default function FakeStore() {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid md={4}>
+        <Grid xs={12} md={4}>
           <Card className={classes.padd}>
             <CardActionArea>
               <CardMedia
@@ -113,7 +113,7 @@ export default function FakeStore() {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid md={4}>
+        <Grid xs={12} md={4}>
           <Card className={classes.padd}>
             <CardActionArea>
               <CardMedia
@@ -132,7 +132,7 @@ export default function FakeStore() {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid md={4}>
+        <Grid xs={12} md={4}>
           <Card className={classes.padd}>
             <CardActionArea>
               <CardMedia
@@ -151,7 +151,7 @@ export default function FakeStore() {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid md={4}>
+        <Grid xs={12} md={4}>
           <Card className={classes.padd}>
             <CardActionArea>
               <CardMedia
@@ -170,7 +170,7 @@ export default function FakeStore() {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid md={4}>
+        <Grid xs={12} md={4}>
           <Card className={classes.padd}>
             <CardActionArea>
               <CardMedia
@@ -189,7 +189,7 @@ export default function FakeStore() {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid md={4}>
+        <Grid xs={12} md={4}>
           <Card className={classes.padd}>
             <CardActionArea>
               <CardMedia

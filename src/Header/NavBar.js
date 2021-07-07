@@ -10,7 +10,11 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    position: 'fixed',
+    width: '100%',
+    zIndex: 999,
   },
+
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -21,6 +25,15 @@ const useStyles = makeStyles((theme) => ({
     border: '2px solid white',
     borderRadius: '20px',
   },
+  flexible: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  ghost: {
+    backgroundColor: 'transparent',
+    fontWeight: 'bold',
+    color: 'black',
+  },
 }))
 
 export default function ButtonAppBar() {
@@ -28,8 +41,8 @@ export default function ButtonAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
+      <AppBar position="static" className={classes.ghost}>
+        <Toolbar className={classes.flexible}>
           <Typography variant="h6" className={classes.title}>
             MDB
           </Typography>

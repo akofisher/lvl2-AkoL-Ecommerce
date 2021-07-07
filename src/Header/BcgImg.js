@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'bold',
     fontSize: '40px',
     color: 'white',
+    opacity: '0.6',
   },
 }))
 

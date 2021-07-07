@@ -41,7 +41,7 @@ export default function Loyout() {
       {/* BODY */}
       <Grid container xs={12}>
         {/* LEFT */}
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={4}>
           <FirstList />
           <SearchInp />
           <CheckboxList />
@@ -52,7 +52,7 @@ export default function Loyout() {
           <ColoredCheckbox />
         </Grid>
         {/* RIGHT */}
-        <Grid item xs={8} className={classes.spaceBTW}>
+        <Grid item xs={12} sm={8} className={classes.spaceBTW}>
           <TopLabel />
           <FakeStore />
           <BottLabel />
