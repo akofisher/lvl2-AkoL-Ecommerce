@@ -1,11 +1,11 @@
 import React from 'react'
 import './App.scss'
-import Loyout from './Loyout/Loyout'
+import Products from './products/Products'
 
 function App() {
   return (
     <React.Fragment>
-      <Loyout />
+      <Products />
     </React.Fragment>
   )
 }
