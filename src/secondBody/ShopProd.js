@@ -1,11 +1,11 @@
 import React from 'react'
 import Loyout from '../Loyout/Loyout'
-import MainBody from '../Body/MainBody'
+import SecondBody from './SecondBody'
 
-export default function Products() {
+export default function ShopProd() {
   return (
     <Loyout>
-      <MainBody />
+      <SecondBody />
     </Loyout>
   )
 }
