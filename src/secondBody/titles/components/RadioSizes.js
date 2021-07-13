@@ -10,6 +10,12 @@ import FormLabel from '@material-ui/core/FormLabel'
 const useStyles = makeStyles({
   flexible: {
     display: 'flex',
+    flexDirection: 'row',
+  },
+  fnt: {
+    fontSize: '20px',
+    marginTop: '6px',
+    marginBottom: '15px',
   },
   root: {
     '&:hover': {
@@ -72,12 +78,14 @@ function StyledRadio(props) {
 export default function RadioSizes() {
   const classes = useStyles()
   return (
-    <FormControl component="fieldset" className={classes.flexible}>
-      <FormLabel component="legend">Select Size</FormLabel>
+    <FormControl component="fieldset">
+      <FormLabel className={classes.fnt}>Select Size</FormLabel>
+
       <RadioGroup
         defaultValue="SMALL"
         aria-label="size"
         name="customized-radios"
+        className={classes.flexible}
       >
         <FormControlLabel
           value="SMALL"

@@ -4,6 +4,7 @@ import { Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core'
 import ImagesShow from './imgShow/ImagesShow'
 import Titles from './titles/Titles'
+import BottPanel from './bottomTitle/BottPanel'
 
 const useStyles = makeStyles((theme) => ({
   padd: {
@@ -12,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
   },
   flexible: {
     display: 'flex',
+  },
+  vieW: {
+    justifyContent: 'center',
   },
 }))
 
@@ -24,11 +28,13 @@ export default function SecondBody() {
           Product page
         </Typography>
       </Grid>
-      <Grid item xs={12} className={classes.flexible}>
+      <Grid container xs={12} className={classes.flexible}>
         <ImagesShow />
         <Titles />
       </Grid>
-      <Grid item xs={12}></Grid>
+      <Grid container className={classes.vieW} xs={12}>
+        <BottPanel />
+      </Grid>
     </Grid>
   )
 }

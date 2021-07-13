@@ -4,8 +4,9 @@ import { makeStyles } from '@material-ui/core'
 import Rating from '@material-ui/lab/Rating'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
-import Quantity from './Quantity'
-import RadioSizes from './RadioSizes'
+import Quantity from './components/Quantity'
+import RadioSizes from './components/RadioSizes'
+import Buttons from './components/Buttons'
 
 const useStyles = makeStyles((theme) => ({
   Flex: {
@@ -35,6 +36,10 @@ const useStyles = makeStyles((theme) => ({
     border: '1px solid lightgray',
     width: '100%',
     margin: '20px 0',
+  },
+  flexible: {
+    display: 'flex',
+    width: '100%',
   },
 }))
 
@@ -85,11 +90,16 @@ export default function Titles() {
         </Box>
         <Box xs={12} className={classes.line}></Box>
         {/* AFTER LINE */}
-        <Box xs={12} md={4}>
-          <Quantity />
-        </Box>
-        <Box xs={12} md={8}>
-          {/* <RadioSizes /> */}
+        <Grid className={classes.flexible}>
+          <Grid item xs={12} md={4}>
+            <Quantity />
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <RadioSizes />
+          </Grid>
+        </Grid>
+        <Box xs={12}>
+          <Buttons />
         </Box>
       </Grid>
     </React.Fragment>
