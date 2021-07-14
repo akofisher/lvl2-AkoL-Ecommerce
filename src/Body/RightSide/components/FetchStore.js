@@ -7,6 +7,10 @@ import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import { Grid } from '@material-ui/core'
 import { useState } from 'react'
+import { useEffect } from 'react'
+import Loader from './Loader'
+import { Link } from 'react-router-dom'
+import { useParams } from 'react-router'
 
 const useStyles = makeStyles((theme) => ({
   media: {
@@ -19,96 +23,71 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-evenly',
   },
   padd: {
-    padding: theme.spacing(2),
+    margin: theme.spacing(2),
     textAlign: 'center',
+    height: '250px',
   },
 }))
 
 export default function FakeStore() {
   const classes = useStyles()
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      img: 'https://sportmaster.ge/wp-content/uploads/2019/04/3-35.jpg',
-      title: 'მაისური',
-      price: '0.50$',
-    },
-    {
-      id: 2,
-      img: 'https://sportmaster.ge/wp-content/uploads/2019/04/3-35.jpg',
-      title: 'მაისური',
-      price: '0.60$',
-    },
-    {
-      id: 3,
-      img: 'https://sportmaster.ge/wp-content/uploads/2019/04/3-35.jpg',
-      title: 'მაისური',
-      price: '0.70$',
-    },
-    {
-      id: 4,
-      img: 'https://sportmaster.ge/wp-content/uploads/2019/04/3-35.jpg',
-      title: 'მაისური',
-      price: '0.80$',
-    },
-    {
-      id: 5,
-      img: 'https://sportmaster.ge/wp-content/uploads/2019/04/3-35.jpg',
-      title: 'მაისური',
-      price: '0.90$',
-    },
-    {
-      id: 6,
-      img: 'https://sportmaster.ge/wp-content/uploads/2019/04/3-35.jpg',
-      title: 'მაისური',
-      price: '1$',
-    },
-    {
-      id: 7,
-      img: 'https://sportmaster.ge/wp-content/uploads/2019/04/3-35.jpg',
-      title: 'მაისური',
-      price: '2$',
-    },
-    {
-      id: 8,
-      img: 'https://sportmaster.ge/wp-content/uploads/2019/04/3-35.jpg',
-      title: 'მაისური',
-      price: '3$',
-    },
-    {
-      id: 9,
-      img: 'https://sportmaster.ge/wp-content/uploads/2019/04/3-35.jpg',
-      title: 'მაისური',
-      price: '4$',
-    },
-  ])
+  const [products, setProducts] = useState([])
+  const [loading, setIsLoading] = useState(false)
+  const { id } = useParams()
+
+  useEffect(() => {
+    setIsLoading(true)
+    fetch(`https://fakestoreapi.com/products`)
+      .then((res) => res.json())
+      .then((json) => {
+        setProducts(
+          json.map((data) => {
+            return {
+              title: data.title,
+              price: data.price,
+              image: data.image,
+              id: data.id,
+            }
+          }),
+        )
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
+  }, [])
 
   return (
     <React.Fragment>
       <Grid container className={classes.flexible}>
-        {products.map((data) => {
-          return (
-            <Grid xs={12} md={4} key={data.id}>
-              <Card className={classes.padd}>
-                <CardActionArea>
-                  <CardMedia
-                    className={classes.media}
-                    image={data.img}
-                    title={data.title}
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {data.title}
-                    </Typography>
-                    <Typography gutterBottom component="h2">
-                      {data.price}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Grid>
-          )
-        })}
+        <Loader isLoading={loading}>
+          {!!products.length &&
+            products.map((data) => {
+              return (
+                <Grid xs={12} md={4} key={data.id}>
+                  <Card className={classes.padd}>
+                    <CardActionArea component={Link} to="/shop_product/:id">
+                      <CardMedia
+                        className={classes.media}
+                        image={data.image}
+                        title={data.title}
+                      />
+                      <CardContent>
+                        <Typography gutterBottom variant="p" component="p">
+                          {data.title}
+                        </Typography>
+                        <Typography gutterBottom component="h2">
+                          {data.price}$
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+              )
+            })}
+        </Loader>
       </Grid>
     </React.Fragment>
   )
