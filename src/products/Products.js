@@ -1,6 +1,6 @@
 import React from 'react'
-import Loyout from '../Loyout/Loyout'
-import MainBody from '../Body/MainBody'
+import Loyout from '../loyout/loyout'
+import MainBody from '../content/MainBody'
 
 export default function Products() {
   return (

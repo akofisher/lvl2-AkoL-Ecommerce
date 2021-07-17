@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button'
 import ControlledOpenSelect from './SelectFlag'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import { Link } from 'react-router-dom'
+import { HOMEPAGE, SINGLE_LIST } from '../../routes'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,11 +54,8 @@ export default function ButtonAppBar() {
           <Button color="inherit">
             <ControlledOpenSelect />
           </Button>
-          <Button component={Link} color="inherit" to="/">
+          <Button component={Link} color="inherit" to={HOMEPAGE}>
             Home
-          </Button>
-          <Button component={Link} color="inherit" to="/shop_product/:id">
-            Shop
           </Button>
           <Button color="inherit">Contact</Button>
           <Button color="inherit">Sign in</Button>

@@ -10,7 +10,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import Loader from './Loader'
 import { Link } from 'react-router-dom'
-import { useParams } from 'react-router'
+import { SINGLE_LIST } from '../../../routes'
 
 const useStyles = makeStyles((theme) => ({
   media: {
@@ -33,7 +33,6 @@ export default function FakeStore() {
   const classes = useStyles()
   const [products, setProducts] = useState([])
   const [loading, setIsLoading] = useState(false)
-  const { id } = useParams()
 
   useEffect(() => {
     setIsLoading(true)
@@ -68,7 +67,10 @@ export default function FakeStore() {
               return (
                 <Grid xs={12} md={4} key={data.id}>
                   <Card className={classes.padd}>
-                    <CardActionArea component={Link} to="/shop_product/:id">
+                    <CardActionArea
+                      component={Link}
+                      to={SINGLE_LIST.replace(':id', data.id)}
+                    >
                       <CardMedia
                         className={classes.media}
                         image={data.image}
