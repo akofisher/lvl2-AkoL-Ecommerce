@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     padding: '10px 0px',
+    maxWidth: '300px',
   },
   inLine: {
     margin: '0px',

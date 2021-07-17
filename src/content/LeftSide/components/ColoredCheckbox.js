@@ -8,9 +8,11 @@ import Typography from '@material-ui/core/Typography'
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
+    maxWidth: '300px',
   },
   PAD: {
     padding: '24px',
+    maxWidth: '300px',
   },
   title: {
     paddingLeft: '10px',
