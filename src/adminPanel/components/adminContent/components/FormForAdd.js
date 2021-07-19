@@ -2,9 +2,8 @@ import React from 'react'
 import { useFormik } from 'formik'
 import { makeStyles } from '@material-ui/core'
 import { TextField } from '@material-ui/core'
+import { useEffect } from 'react'
 
-// A custom validation function. This must return an object
-// which keys are symmetrical to our values/initialValues
 const validate = (values) => {
   const errors = {}
   if (!values.title) {
@@ -40,11 +39,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function FormForAdd() {
+export default function FormForAdd({ isSubmiting, callback }) {
+  useEffect(() => {
+    if (isSubmiting) {
+      formik.handleSubmit()
+    }
+  }, [isSubmiting])
   const classes = useStyles()
-  // Pass the useFormik() hook initial form values, a validate function that will be called when
-  // form values change or fields are blurred, and a submit function that will
-  // be called when the form is submitted
+
   const formik = useFormik({
     initialValues: {
       title: '',
@@ -56,6 +58,7 @@ export default function FormForAdd() {
     validate,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2))
+      callback()
     },
   })
   return (

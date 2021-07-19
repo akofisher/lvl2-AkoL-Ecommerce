@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { useTheme } from '@material-ui/core/styles'
@@ -31,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 export default function RespDialog() {
   const classes = useStyles()
   const [open, setOpen] = React.useState(false)
+  const [submitting, setSubmitting] = React.useState(false)
   const theme = useTheme()
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
 
@@ -39,7 +39,12 @@ export default function RespDialog() {
   }
 
   const handleClose = () => {
+    setSubmitting(false)
     setOpen(false)
+  }
+
+  const handleSubmit = () => {
+    setSubmitting(true)
   }
 
   return (
@@ -63,13 +68,13 @@ export default function RespDialog() {
           {'ADD NEW PRODUCT'}
         </DialogTitle>
         <DialogContent>
-          <FormForAdd />
+          <FormForAdd callback={handleClose} isSubmiting={submitting} />
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose} color="primary">
             CANCEL
           </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <Button onClick={handleSubmit} color="primary" autoFocus>
             ADD
           </Button>
         </DialogActions>
