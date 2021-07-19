@@ -7,7 +7,8 @@ import Button from '@material-ui/core/Button'
 import ControlledOpenSelect from './SelectFlag'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import { Link } from 'react-router-dom'
-import { HOMEPAGE, SINGLE_LIST } from '../../routes'
+import { HOMEPAGE } from '../../../routes'
+import { SINGLE_LIST } from '../../../routes'
 
 const useStyles = makeStyles((theme) => ({
   root: {

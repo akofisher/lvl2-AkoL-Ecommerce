@@ -10,7 +10,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import Loader from './Loader'
 import { Link } from 'react-router-dom'
-import { SINGLE_LIST } from '../../../routes'
+import { SINGLE_LIST } from '../../../../routes'
 
 const useStyles = makeStyles((theme) => ({
   media: {
