@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function FormForAdd({ isSubmiting, callback }) {
+  const [state, setState] = React.useState({})
   useEffect(() => {
     if (isSubmiting) {
       formik.handleSubmit()
@@ -56,9 +57,26 @@ export default function FormForAdd({ isSubmiting, callback }) {
       category: '',
     },
     validate,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2))
+    onSubmit: async (values) => {
+      try {
+        const response = await fetch('https://fakestoreapi.com/products', {
+          method: 'POST',
+          body: JSON.stringify({
+            title: values.title,
+            price: values.price,
+            description: values.desccription,
+            image: values.image,
+            category: values.category,
+          }),
+        })
+        console.log(response, 'response from server')
+        setState(response)
+      } catch (e) {
+        console.log(e)
+      }
       callback()
+
+      // alert(JSON.stringify(values, null, 2))
     },
   })
   return (
@@ -86,7 +104,6 @@ export default function FormForAdd({ isSubmiting, callback }) {
         className={classes.marG}
       />
       {formik.errors.price ? <div>{formik.errors.price}</div> : null}
-
       <TextField
         id="description"
         name="description"
