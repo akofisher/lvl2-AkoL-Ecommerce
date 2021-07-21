@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button'
 import ControlledOpenSelect from './SelectFlag'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import { Link } from 'react-router-dom'
-import { HOMEPAGE, LOGIN } from '../../../routes'
+import { HOMEPAGE, LOGIN, SIGN_UP } from '../../../routes'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,12 +58,14 @@ export default function ButtonAppBar() {
             Home
           </Button>
           <Button color="inherit">Contact</Button>
-          <Button color="inherit">Sign in</Button>
+          <Button color="inherit" component={Link} to={LOGIN}>
+            Sign in
+          </Button>
           <Button
             color="inherit"
             className={classes.bTn}
             component={Link}
-            to={LOGIN}
+            to={SIGN_UP}
           >
             Sign Up
           </Button>

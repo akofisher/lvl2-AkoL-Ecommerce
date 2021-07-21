@@ -14,11 +14,21 @@ import FacebookIcon from '@material-ui/icons/Facebook'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import LinkedInIcon from '@material-ui/icons/LinkedIn'
 import InstagramIcon from '@material-ui/icons/Instagram'
-import { SIGN_UP } from '../../routes'
-import { Link as Rlink } from 'react-router-dom'
 
 const validate = (values) => {
   const errors = {}
+
+  if (!values.firstName) {
+    errors.firstName = 'Required'
+  }
+
+  if (!values.lastName) {
+    errors.lastName = 'Required'
+  }
+
+  if (!values.mobile) {
+    errors.mobile = 'Required'
+  }
 
   if (!values.email) {
     errors.email = 'Required'
@@ -48,10 +58,7 @@ const useStyles = makeStyles((theme) => ({
   inPP: {
     margin: '20px 0',
   },
-  inLine: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
+
   centeR: {
     textAlign: 'center',
     margin: '30px auto',
@@ -60,19 +67,29 @@ const useStyles = makeStyles((theme) => ({
     margin: '20px auto',
     width: '100px',
     justifyContent: 'center',
-    padding: '10px 20px',
+    padding: '10px',
   },
   iconSS: {
     textAlign: 'center',
   },
+  texTT: {
+    color: 'gray',
+    fontSize: '14px',
+  },
+  inPP2: {
+    margin: '20px 0',
+  },
 }))
 
-export default function Login() {
+export default function SignUp() {
   const classes = useStyles()
   const formik = useFormik({
     initialValues: {
-      password: '',
+      firstName: '',
+      lastName: '',
       email: '',
+      passwor: '',
+      mobile: '',
     },
     validate,
     onSubmit: (values) => {
@@ -85,8 +102,45 @@ export default function Login() {
       <Grid container className={classes.padd}>
         <form onSubmit={formik.handleSubmit} className={classes.flexible}>
           <Typography variant="h4" className={classes.centeR}>
-            Sign In
+            Sign Up
           </Typography>
+          <Grid container xs={12}>
+            <Grid
+              component={TextField}
+              id="firstname"
+              name="firstname"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.firstname}
+              variant="outlined"
+              label="First name"
+              className={classes.inPP2}
+              xs={12}
+              md={6}
+              item
+            />
+            {formik.errors.firstname ? (
+              <div>{formik.errors.firstname}</div>
+            ) : null}
+
+            <Grid
+              component={TextField}
+              id="lastname"
+              name="lastname"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.lastname}
+              variant="outlined"
+              label="Last Name"
+              className={classes.inPP2}
+              xs={12}
+              md={6}
+              item
+            />
+            {formik.errors.lastname ? (
+              <div>{formik.errors.lastname}</div>
+            ) : null}
+          </Grid>
           <TextField
             id="email"
             name="email"
@@ -108,21 +162,37 @@ export default function Login() {
             label="Your password"
             className={classes.inPP}
           />
-          {formik.errors.password ? <div>{formik.errors.password}</div> : null}
-          <div className={classes.inLine}>
+          {formik.errors.password ? (
+            <div>{formik.errors.password}</div>
+          ) : (
+            <div className={classes.texTT}>
+              At least 8 characters and 1 digit
+            </div>
+          )}
+
+          <TextField
+            id="mobile"
+            name="mobile"
+            type="number"
+            onChange={formik.handleChange}
+            value={formik.values.mobile}
+            variant="outlined"
+            label="Phone number"
+            className={classes.inPP}
+          />
+          {formik.errors.mobile ? (
+            <div>{formik.errors.mobile}</div>
+          ) : (
+            <div className={classes.texTT}>
+              Optional - for two step authentication
+            </div>
+          )}
+
+          <div className={classes.centeR}>
             <FormControlLabel
               control={<Checkbox name="checkedC" />}
-              label="REMEMBER ME"
+              label="SUBSCRIBE TO OUR NEWSLETTER"
             />
-            <Link
-              component="button"
-              variant="body2"
-              onClick={() => {
-                console.info("I'm a button.")
-              }}
-            >
-              Forgot password?
-            </Link>
           </div>
           <Button
             variant="contained"
@@ -130,22 +200,9 @@ export default function Login() {
             href="#contained-buttons"
             className={classes.btNN}
           >
-            SIGN IN
+            SIGN UP
           </Button>
           <div className={classes.centeR}>
-            <Typography variant="h6" className={classes.inPP}>
-              Not a member?{' '}
-              <Rlink
-                variant="body2"
-                onClick={() => {
-                  console.info("I'm a button.")
-                }}
-                component={Link}
-                to={SIGN_UP}
-              >
-                Register
-              </Rlink>
-            </Typography>
             <Typography className={classes.inPP} variant="h6">
               or sign in with:
             </Typography>

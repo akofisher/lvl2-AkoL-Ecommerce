@@ -69,14 +69,15 @@ export default function FormForAdd({ isSubmiting, callback }) {
             category: values.category,
           }),
         })
-        console.log(response, 'response from server')
+
         setState(response)
       } catch (e) {
         console.log(e)
       }
-      callback()
 
-      // alert(JSON.stringify(values, null, 2))
+      setTimeout(() => {
+        callback()
+      }, 2000)
     },
   })
   return (
@@ -139,6 +140,17 @@ export default function FormForAdd({ isSubmiting, callback }) {
         className={classes.marG}
       />
       {formik.errors.image ? <div>{formik.errors.image}</div> : null}
+      {state.ok == true ? (
+        <div
+          style={{
+            background: 'green',
+            color: 'white',
+            paddingLeft: '10px',
+          }}
+        >
+          SUCCESS
+        </div>
+      ) : null}
     </form>
   )
 }

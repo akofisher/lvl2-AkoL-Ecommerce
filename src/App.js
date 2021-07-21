@@ -7,15 +7,17 @@ import { HOMEPAGE, SINGLE_LIST, ADMIN_PANEL, LOGIN } from './routes'
 import ScrollToTop from './scroll'
 import AdminPanel from './adminPanel/adminPanel'
 import Login from './pages/login&signUp/login'
+import { SIGN_UP } from './routes'
+import SignUp from './pages/login&signUp/SingUp'
 
 function App() {
   return (
     <Router>
       <Switch>
-        {/* <Route path={REGISTRATION}>
+        <Route path={SIGN_UP}>
           <ScrollToTop />
-          <AdminPanel />
-        </Route> */}
+          <SignUp />
+        </Route>
         <Route path={LOGIN}>
           <ScrollToTop />
           <Login />
