@@ -6,6 +6,7 @@ import ImagesShow from './imgShow/imagesShow'
 import Titles from './titles/titles'
 import BottPanel from './bottomTitle/bottPanel'
 import Loyout from '../../loyout/loyout'
+import ScrollToTop from '../../scroll'
 
 const useStyles = makeStyles((theme) => ({
   padd: {
@@ -24,6 +25,7 @@ export default function SecondBody() {
   const classes = useStyles()
   return (
     <Loyout>
+      <ScrollToTop />
       <Grid container xs={12}>
         <Grid item xs={12}>
           <Typography variant="h4" className={classes.padd}>

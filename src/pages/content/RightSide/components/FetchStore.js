@@ -36,11 +36,11 @@ export default function FakeStore() {
 
   useEffect(() => {
     setIsLoading(true)
-    fetch(`https://fakestoreapi.com/products`)
+    fetch(`http://159.65.126.180/api/products`)
       .then((res) => res.json())
       .then((json) => {
         setProducts(
-          json.map((data) => {
+          json.data.map((data) => {
             return {
               title: data.title,
               price: data.price,

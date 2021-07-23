@@ -8,26 +8,18 @@ import Footer from '../../loyout/footer/footer'
 import Button from '@material-ui/core/Button'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Link from '@material-ui/core/Link'
 import { Box } from '@material-ui/core'
 import FacebookIcon from '@material-ui/icons/Facebook'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import LinkedInIcon from '@material-ui/icons/LinkedIn'
 import InstagramIcon from '@material-ui/icons/Instagram'
+import ScrollToTop from '../../scroll'
 
 const validate = (values) => {
   const errors = {}
 
-  if (!values.firstName) {
-    errors.firstName = 'Required'
-  }
-
-  if (!values.lastName) {
-    errors.lastName = 'Required'
-  }
-
-  if (!values.mobile) {
-    errors.mobile = 'Required'
+  if (!values.name) {
+    errors.name = 'Required'
   }
 
   if (!values.email) {
@@ -39,8 +31,17 @@ const validate = (values) => {
     errors.password = 'Required'
   } else if (values.password.length < 8) {
     errors.password = 'Password is too short - should be 8 chars minimum.'
-  } else if (!/[A-Z0-9._%+-]/i.test(values.email)) {
+  } else if (!/[A-Z0-9._%+-]/i.test(values.password_confirmation)) {
     errors.password = 'Password can only contain Numbers and Latin letters.'
+  }
+  if (!values.password_confirmation) {
+    errors.password_confirmation = 'Required'
+  } else if (values.password_confirmation.length < 8) {
+    errors.password_confirmation =
+      'Password is too short - should be 8 chars minimum.'
+  } else if (!/[A-Z0-9._%+-]/i.test(values.password_confirmation)) {
+    errors.password_confirmation =
+      'Password can only contain Numbers and Latin letters.'
   }
 
   return errors
@@ -82,22 +83,43 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function SignUp() {
+  const [state, setState] = React.useState({})
   const classes = useStyles()
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      lastName: '',
+      name: '',
       email: '',
-      passwor: '',
-      mobile: '',
+      password: '',
+      password_confirmation: '',
     },
     validate,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2))
+    onSubmit: async (values) => {
+      try {
+        const response = await fetch('http://159.65.126.180/api/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            name: values.name,
+            email: values.email,
+            password: values.password,
+            password_confirmation: values.password_confirmation,
+          }),
+        })
+
+        setState(response)
+        console.log(response, 'akoooo')
+      } catch (e) {
+        console.log(e)
+      }
     },
   })
+
   return (
     <React.Fragment>
+      <ScrollToTop />
       <ButtonAppBar />
       <Grid container className={classes.padd}>
         <form onSubmit={formik.handleSubmit} className={classes.flexible}>
@@ -107,38 +129,37 @@ export default function SignUp() {
           <Grid container xs={12}>
             <Grid
               component={TextField}
-              id="firstname"
-              name="firstname"
+              id="name"
+              name="name"
               type="text"
               onChange={formik.handleChange}
-              value={formik.values.firstname}
+              value={formik.values.name}
               variant="outlined"
-              label="First name"
+              label="Name"
               className={classes.inPP2}
               xs={12}
               md={6}
               item
             />
-            {formik.errors.firstname ? (
-              <div>{formik.errors.firstname}</div>
-            ) : null}
+            {formik.errors.name ? <div>{formik.errors.name}</div> : null}
 
             <Grid
               component={TextField}
-              id="lastname"
-              name="lastname"
+              id="lastName"
+              name="lastName"
               type="text"
               onChange={formik.handleChange}
-              value={formik.values.lastname}
+              value={formik.values.lastName}
               variant="outlined"
               label="Last Name"
               className={classes.inPP2}
               xs={12}
               md={6}
               item
+              disabled
             />
-            {formik.errors.lastname ? (
-              <div>{formik.errors.lastname}</div>
+            {formik.errors.lastName ? (
+              <div>{formik.errors.lastName}</div>
             ) : null}
           </Grid>
           <TextField
@@ -171,17 +192,17 @@ export default function SignUp() {
           )}
 
           <TextField
-            id="mobile"
-            name="mobile"
-            type="number"
+            id="password_confirmation"
+            name="password_confirmation"
+            type="password"
             onChange={formik.handleChange}
-            value={formik.values.mobile}
+            value={formik.values.password_confirmation}
             variant="outlined"
-            label="Phone number"
+            label="Confirm your password"
             className={classes.inPP}
           />
-          {formik.errors.mobile ? (
-            <div>{formik.errors.mobile}</div>
+          {formik.errors.password_confirmation ? (
+            <div>{formik.errors.password_confirmation}</div>
           ) : (
             <div className={classes.texTT}>
               Optional - for two step authentication
@@ -197,8 +218,8 @@ export default function SignUp() {
           <Button
             variant="contained"
             color="primary"
-            href="#contained-buttons"
             className={classes.btNN}
+            type="submit"
           >
             SIGN UP
           </Button>

@@ -37,11 +37,11 @@ export default function AdminContent() {
 
   useEffect(() => {
     setIsLoading(true)
-    fetch(`https://fakestoreapi.com/products?limit=8`)
+    fetch(`http://159.65.126.180/api/products?limit=8`)
       .then((res) => res.json())
       .then((json) => {
         setProducts(
-          json.map((data) => {
+          json.data.map((data) => {
             return {
               title: data.title,
               price: data.price,

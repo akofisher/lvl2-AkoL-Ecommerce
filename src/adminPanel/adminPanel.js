@@ -9,14 +9,9 @@ export default function AdminPanel() {
   return (
     <Router>
       <Switch>
-        <Route path={ADMIN_PRODUCTS}>
-          <ScrollToTop />
-          <AdminProp />
-        </Route>
-        <Route path={ADMIN_PANEL}>
-          <ScrollToTop />
-          <AdminLoyout />
-        </Route>
+        <Route path={ADMIN_PRODUCTS} component={AdminProp} />
+
+        <Route path={ADMIN_PANEL} component={AdminLoyout} />
       </Switch>
     </Router>
   )

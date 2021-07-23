@@ -41,7 +41,7 @@ export default function ImagesShow() {
 
   useEffect(() => {
     setIsLoading(true)
-    fetch(`https://fakestoreapi.com/products/${id}`)
+    fetch(`http://159.65.126.180/api/products/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProducts({

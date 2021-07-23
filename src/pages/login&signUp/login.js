@@ -16,6 +16,7 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn'
 import InstagramIcon from '@material-ui/icons/Instagram'
 import { SIGN_UP } from '../../routes'
 import { Link as Rlink } from 'react-router-dom'
+import ScrollToTop from '../../scroll'
 
 const validate = (values) => {
   const errors = {}
@@ -68,6 +69,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function Login() {
+  const [state, setState] = React.useState({})
   const classes = useStyles()
   const formik = useFormik({
     initialValues: {
@@ -75,12 +77,30 @@ export default function Login() {
       email: '',
     },
     validate,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2))
+    onSubmit: async (values) => {
+      try {
+        const response = await fetch('http://159.65.126.180/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            email: values.email,
+            password: values.password,
+          }),
+        })
+
+        setState(response)
+        console.log(response, 'akoooo')
+      } catch (e) {
+        console.log(e)
+      }
     },
   })
   return (
     <React.Fragment>
+      <ScrollToTop />
       <ButtonAppBar />
       <Grid container className={classes.padd}>
         <form onSubmit={formik.handleSubmit} className={classes.flexible}>
@@ -127,8 +147,8 @@ export default function Login() {
           <Button
             variant="contained"
             color="primary"
-            href="#contained-buttons"
             className={classes.btNN}
+            type="submit"
           >
             SIGN IN
           </Button>
