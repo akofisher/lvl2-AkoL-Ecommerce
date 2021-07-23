@@ -83,16 +83,17 @@ export default function Login() {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Accept: 'application/json',
           },
           body: JSON.stringify({
             email: values.email,
             password: values.password,
           }),
         })
+        const resp = await response.json()
 
-        setState(response)
-        console.log(response, 'akoooo')
+        setState(resp)
+        console.log(resp, 'akoo')
+        return resp
       } catch (e) {
         console.log(e)
       }
