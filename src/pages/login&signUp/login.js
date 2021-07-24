@@ -14,8 +14,8 @@ import FacebookIcon from '@material-ui/icons/Facebook'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import LinkedInIcon from '@material-ui/icons/LinkedIn'
 import InstagramIcon from '@material-ui/icons/Instagram'
-import { SIGN_UP } from '../../routes'
-import { Link as Rlink } from 'react-router-dom'
+import { SIGN_UP, HOMEPAGE } from '../../routes'
+import { Link as Rlink, Redirect } from 'react-router-dom'
 import ScrollToTop from '../../scroll'
 
 const validate = (values) => {
@@ -70,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const [state, setState] = React.useState({})
+
   const classes = useStyles()
   const formik = useFormik({
     initialValues: {
@@ -93,6 +94,12 @@ export default function Login() {
 
         setState(resp)
         console.log(resp, 'akoo')
+        localStorage.setItem('token', resp.token.access_token)
+        localStorage.setItem('userID', resp.user.id)
+        localStorage.setItem('userName', resp.user.name)
+        localStorage.setItem('userEmail', resp.user.email)
+        localStorage.setItem('userAvatar', resp.user.avatar)
+
         return resp
       } catch (e) {
         console.log(e)
@@ -145,6 +152,7 @@ export default function Login() {
               Forgot password?
             </Link>
           </div>
+
           <Button
             variant="contained"
             color="primary"
