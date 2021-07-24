@@ -15,7 +15,7 @@ import TwitterIcon from '@material-ui/icons/Twitter'
 import LinkedInIcon from '@material-ui/icons/LinkedIn'
 import InstagramIcon from '@material-ui/icons/Instagram'
 import { SIGN_UP, HOMEPAGE } from '../../routes'
-import { Link as Rlink, Redirect } from 'react-router-dom'
+import { Link as Rlink, Redirect, useHistory } from 'react-router-dom'
 import ScrollToTop from '../../scroll'
 
 const validate = (values) => {
@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const [state, setState] = React.useState({})
-
+  const history = useHistory()
   const classes = useStyles()
   const formik = useFormik({
     initialValues: {
@@ -99,7 +99,7 @@ export default function Login() {
         localStorage.setItem('userName', resp.user.name)
         localStorage.setItem('userEmail', resp.user.email)
         localStorage.setItem('userAvatar', resp.user.avatar)
-
+        history.push(HOMEPAGE)
         return resp
       } catch (e) {
         console.log(e)
