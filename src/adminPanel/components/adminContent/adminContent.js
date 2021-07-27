@@ -6,12 +6,12 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import { Grid } from '@material-ui/core'
-import { useState } from 'react'
-import { useEffect } from 'react'
 import Loader from '../../../pages/content/RightSide/components/Loader'
 import { Link } from 'react-router-dom'
 import { SINGLE_LIST } from '../../../routes'
 import RespDialog from './components/Modal'
+import { useFetch } from '../../../Hooks/CustomApiHook'
+import { PRODUCT_LIST } from '../../../routes'
 
 const useStyles = makeStyles((theme) => ({
   media: {
@@ -32,38 +32,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AdminContent() {
   const classes = useStyles()
-  const [products, setProducts] = useState([])
-  const [loading, setIsLoading] = useState(false)
-
-  useEffect(() => {
-    setIsLoading(true)
-    fetch(`http://159.65.126.180/api/products?limit=8`)
-      .then((res) => res.json())
-      .then((json) => {
-        setProducts(
-          json.data.map((data) => {
-            return {
-              title: data.title,
-              price: data.price,
-              image: data.image,
-              id: data.id,
-            }
-          }),
-        )
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
-  }, [])
+  const { data, error, isLoading, products } = useFetch(PRODUCT_LIST, {
+    method: 'get',
+  })
 
   return (
     <React.Fragment>
       <Grid container className={classes.flexible}>
         <RespDialog />
-        <Loader isLoading={loading}>
+        <Loader isLoading={isLoading}>
           {!!products.length &&
             products.map((data) => {
               return (

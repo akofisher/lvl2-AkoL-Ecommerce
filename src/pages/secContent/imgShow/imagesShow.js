@@ -2,10 +2,10 @@ import React from 'react'
 import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core'
 import { Paper } from '@material-ui/core'
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { useFetch } from '../../../Hooks/CustomApiHook'
 import { useParams } from 'react-router'
 import Loader from '../../content/RightSide/components/Loader'
+import { PRODUCT_LIST } from '../../../routes'
 
 const useStyles = makeStyles((theme) => ({
   img1: {
@@ -35,34 +35,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ImagesShow() {
   const classes = useStyles()
-  const [products, setProducts] = useState({})
   const { id } = useParams()
-  const [loading, setIsLoading] = useState(false)
 
-  useEffect(() => {
-    setIsLoading(true)
-    fetch(`http://159.65.126.180/api/products/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts({
-          title: data.title,
-          price: data.price,
-          image: data.image,
-          id: data.id,
-        })
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
-  }, [])
+  const { data, error, isLoading, products } = useFetch(
+    `${PRODUCT_LIST}/${id}`,
+    {
+      method: 'get',
+    },
+  )
 
   return (
     <React.Fragment>
       <Grid item xs={12} md={6} className={classes.padd}>
-        <Loader isLoading={loading}>
+        <Loader isLoading={isLoading}>
           <Grid
             xs={12}
             className={classes.img1}

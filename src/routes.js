@@ -1,3 +1,5 @@
+export const PRODUCT_LIST = 'http://159.65.126.180/api/products'
+export const PRODUCT_ADD = 'https://fakestoreapi.com/products'
 export const HOMEPAGE = '/'
 export const SINGLE_LIST = '/product/:id'
 export const ADMIN_PANEL = '/admin'
