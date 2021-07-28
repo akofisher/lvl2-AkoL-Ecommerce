@@ -17,9 +17,7 @@ import InstagramIcon from '@material-ui/icons/Instagram'
 import { SIGN_UP, HOMEPAGE } from '../../routes'
 import { Link as Rlink, Redirect, useHistory } from 'react-router-dom'
 import ScrollToTop from '../../scroll'
-import { UserContext } from '../../store/UserContext'
 import { useEffect } from 'react'
-import { useContext } from 'react'
 
 const validate = (values) => {
   const errors = {}
@@ -73,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const [state, setState] = React.useState({})
-  const userData = useContext(UserContext)
+
   const history = useHistory()
   const classes = useStyles()
 
@@ -101,10 +99,7 @@ export default function Login() {
         setState(resp)
         console.log(resp, 'akoo')
         localStorage.setItem('token', resp.token.access_token)
-        localStorage.setItem('userID', resp.user.id)
-        localStorage.setItem('userName', resp.user.name)
-        localStorage.setItem('userEmail', resp.user.email)
-        localStorage.setItem('userAvatar', resp.user.avatar)
+        localStorage.setItem('user', resp.user)
 
         history.push(HOMEPAGE)
 
@@ -112,21 +107,6 @@ export default function Login() {
       } catch (e) {
         console.log(e)
       }
-      //  ვერ ავამუშავე
-      const TOKEN = localStorage.getItem('token')
-      const ID = localStorage.getItem('userID')
-      const UNAME = localStorage.getItem('userName')
-      const EEMAIL = localStorage.getItem('userEmail')
-
-      useEffect(() => {
-        userData.setData({
-          ...userData.data,
-          isLogedIn: true,
-          user: { TOKEN, ID, UNAME, EEMAIL },
-        })
-        console.log(userData, 'DATAAAA')
-      }, [])
-      //  ვერ ავამუშავე
     },
   })
   return (

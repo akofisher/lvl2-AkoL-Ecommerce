@@ -1,23 +1,8 @@
-import React from 'react'
-import { useState } from 'react'
+import { createContext } from 'react'
 
-export const UserContext = React.createContext({})
-
-const UserContextProvider = ({ children }) => {
-  let [data, setData] = useState({
-    isLogedIn: false,
-    user: {},
-  })
-  return (
-    <UserContext.Provider
-      value={{
-        data,
-        setData,
-      }}
-    >
-      {children}
-    </UserContext.Provider>
-  )
-}
-
-export default UserContextProvider
+export const UserContext = createContext({
+  user: {},
+  updateUser: () => {
+    throw new Error('User, error')
+  },
+})

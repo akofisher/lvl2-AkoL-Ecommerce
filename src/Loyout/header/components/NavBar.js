@@ -8,6 +8,8 @@ import ControlledOpenSelect from './SelectFlag'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import { Link } from 'react-router-dom'
 import { HOMEPAGE, LOGIN, SIGN_UP } from '../../../routes'
+import { useContext } from 'react'
+import { UserContext } from '../../../store/UserContext'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,6 +43,15 @@ const useStyles = makeStyles((theme) => ({
 export default function ButtonAppBar() {
   const classes = useStyles()
 
+  const { updateUser, user } = useContext(UserContext)
+
+  const TOKEN = localStorage.getItem('token')
+  const userInformation = localStorage.getItem('user')
+
+  console.log(userInformation, TOKEN, 'USER')
+  updateUser(userInformation)
+  console.log(user, 'userLOG')
+
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.ghost}>
@@ -58,17 +69,35 @@ export default function ButtonAppBar() {
             Home
           </Button>
           <Button color="inherit">Contact</Button>
-          <Button color="inherit" component={Link} to={LOGIN}>
-            Sign in
-          </Button>
-          <Button
-            color="inherit"
-            className={classes.bTn}
-            component={Link}
-            to={SIGN_UP}
-          >
-            Sign Up
-          </Button>
+
+          {!!TOKEN == true ? (
+            <React.Fragment>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  window.localStorage.clear()
+                  window.location.reload()
+                }}
+              >
+                LOGOUT{' '}
+              </Button>
+              <Button color="inherit">HELLO </Button>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <Button color="inherit" component={Link} to={LOGIN}>
+                Sign in
+              </Button>
+              <Button
+                color="inherit"
+                className={classes.bTn}
+                component={Link}
+                to={SIGN_UP}
+              >
+                Sign Up
+              </Button>
+            </React.Fragment>
+          )}
         </Toolbar>
       </AppBar>
     </div>
