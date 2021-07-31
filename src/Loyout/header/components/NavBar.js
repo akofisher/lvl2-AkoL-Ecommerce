@@ -46,6 +46,8 @@ export default function ButtonAppBar() {
   const { updateUser, user } = useContext(UserContext)
 
   const TOKEN = localStorage.getItem('token')
+  const userName = localStorage.getItem('userName')
+  const userEmail = localStorage.getItem('userEmail')
   const userInformation = localStorage.getItem('user')
 
   console.log(userInformation, TOKEN, 'USER')
@@ -72,6 +74,7 @@ export default function ButtonAppBar() {
 
           {!!TOKEN == true ? (
             <React.Fragment>
+              <Button color="inherit">HELLO {userName} </Button>
               <Button
                 color="inherit"
                 onClick={() => {
@@ -81,7 +84,6 @@ export default function ButtonAppBar() {
               >
                 LOGOUT{' '}
               </Button>
-              <Button color="inherit">HELLO </Button>
             </React.Fragment>
           ) : (
             <React.Fragment>

@@ -99,6 +99,8 @@ export default function Login() {
         setState(resp)
         console.log(resp, 'akoo')
         localStorage.setItem('token', resp.token.access_token)
+        localStorage.setItem('userName', resp.user.name)
+        localStorage.setItem('userEmail', resp.user.email)
         localStorage.setItem('user', resp.user)
 
         history.push(HOMEPAGE)
