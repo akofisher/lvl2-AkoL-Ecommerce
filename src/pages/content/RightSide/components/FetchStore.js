@@ -10,8 +10,8 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import Loader from './Loader'
 import { Link } from 'react-router-dom'
-import { SINGLE_LIST, PRODUCT_LIST } from '../../../../routes'
-import { useFetch } from '../../../../Hooks/CustomApiHook'
+import { SINGLE_LIST } from '../../../../routes'
+import { Api } from '../../../../Hooks/CustomApiHook'
 
 const useStyles = makeStyles((theme) => ({
   media: {
@@ -32,20 +32,25 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FakeStore() {
   const classes = useStyles()
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
-  const { data, error, isLoading, products } = useFetch(
-    `${PRODUCT_LIST}?limit=8`,
-    {
-      method: 'get',
-    },
-  )
+  useEffect(() => {
+    setIsLoading(true)
+    Api.getProductList()
+      .then((el) => {
+        setData(el)
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false))
+  }, [])
 
   return (
     <React.Fragment>
       <Grid container className={classes.flexible}>
         <Loader isLoading={isLoading}>
-          {!!products.length &&
-            products.map((data) => {
+          {!!data.length &&
+            data.map((data) => {
               return (
                 <Grid xs={12} md={4} key={data.id}>
                   <Card className={classes.padd}>

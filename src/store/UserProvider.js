@@ -1,18 +1,27 @@
 import React, { useState } from 'react'
-import { UserContext } from './UserContext'
+
+import { Api } from '../Hooks/CustomApiHook'
+
+export const User = JSON.parse(localStorage.getItem('user'))
+
+if (User) {
+  Api.privatePage()
+}
+
+export const UserContext = React.createContext({})
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({})
-
-  const updateUser = (update) => {
-    setUser(update)
-  }
+  const [data, setData] = useState({
+    user: null,
+    isLogedIn: false,
+    isLogedOut: true,
+  })
 
   return (
     <UserContext.Provider
       value={{
-        user: user,
-        updateUser: updateUser,
+        data,
+        setData,
       }}
     >
       {children}

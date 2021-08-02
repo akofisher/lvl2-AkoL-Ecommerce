@@ -17,6 +17,11 @@ import InstagramIcon from '@material-ui/icons/Instagram'
 import { SIGN_UP, HOMEPAGE } from '../../routes'
 import { Link as Rlink, Redirect, useHistory } from 'react-router-dom'
 import ScrollToTop from '../../scroll'
+import { Api } from '../../Hooks/CustomApiHook'
+import { User } from '../../store/UserProvider'
+import { PRIVATE } from '../../routes'
+import { useContext } from 'react'
+import { UserContext } from '../../store/UserProvider'
 import { useEffect } from 'react'
 
 const validate = (values) => {
@@ -70,8 +75,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function Login() {
-  const [state, setState] = React.useState({})
-
+  const userData = useContext(UserContext)
   const history = useHistory()
   const classes = useStyles()
 
@@ -82,33 +86,31 @@ export default function Login() {
     },
 
     validate,
-    onSubmit: async (values) => {
-      try {
-        const response = await fetch('http://159.65.126.180/api/auth/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: values.email,
-            password: values.password,
-          }),
+    onSubmit: (values) => {
+      Api.sighIn(formik.values.email, formik.values.password)
+        .then((json) => {
+          localStorage.setItem('user', JSON.stringify(json))
+          console.log(json, 'AKOOOOO')
+          localStorage.setItem('token', JSON.stringify(json.token.access_token))
+          userData.setData({
+            ...userData.data,
+            isLogedIn: true,
+            isLogedOut: false,
+            user: json.user,
+          })
+
+          history.push(PRIVATE)
         })
-        const resp = await response.json()
 
-        setState(resp)
-        console.log(resp, 'akoo')
-        localStorage.setItem('token', resp.token.access_token)
-        localStorage.setItem('userName', resp.user.name)
-        localStorage.setItem('userEmail', resp.user.email)
-        localStorage.setItem('user', resp.user)
-
-        history.push(HOMEPAGE)
-
-        return resp
-      } catch (e) {
-        console.log(e)
-      }
+        .catch((error) => {
+          console.log(error, 'error')
+        })
+      useEffect(() => {
+        userData.setData({
+          ...userData.data,
+          user: User.user,
+        })
+      }, [])
     },
   })
   return (

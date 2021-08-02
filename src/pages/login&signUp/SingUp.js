@@ -14,6 +14,9 @@ import TwitterIcon from '@material-ui/icons/Twitter'
 import LinkedInIcon from '@material-ui/icons/LinkedIn'
 import InstagramIcon from '@material-ui/icons/Instagram'
 import ScrollToTop from '../../scroll'
+import { Api } from '../../Hooks/CustomApiHook'
+import { SIGN_UP } from '../../routes'
+import { useHistory } from 'react-router'
 
 const validate = (values) => {
   const errors = {}
@@ -83,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function SignUp() {
-  const [state, setState] = React.useState({})
+  const history = useHistory()
   const classes = useStyles()
   const formik = useFormik({
     initialValues: {
@@ -93,27 +96,19 @@ export default function SignUp() {
       password_confirmation: '',
     },
     validate,
-    onSubmit: async (values) => {
-      try {
-        const response = await fetch('http://159.65.126.180/api/register', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify({
-            name: values.name,
-            email: values.email,
-            password: values.password,
-            password_confirmation: values.password_confirmation,
-          }),
+    onSubmit: (values) => {
+      console.log(values)
+      Api.sighUp(
+        formik.values.name,
+        formik.values.email,
+        formik.values.password,
+        formik.values.password_confirmation,
+      )
+        .then((json) => {
+          console.log(json)
+          history.push(SIGN_UP)
         })
-
-        setState(response)
-        console.log(response, 'akoooo')
-      } catch (e) {
-        console.log(e)
-      }
+        .catch((error) => console.log(error, 'error'))
     },
   })
 

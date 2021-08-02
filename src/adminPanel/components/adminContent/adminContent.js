@@ -10,8 +10,8 @@ import Loader from '../../../pages/content/RightSide/components/Loader'
 import { Link } from 'react-router-dom'
 import { SINGLE_LIST } from '../../../routes'
 import RespDialog from './components/Modal'
-import { useFetch } from '../../../Hooks/CustomApiHook'
-import { PRODUCT_LIST } from '../../../routes'
+import { useState, useEffect } from 'react'
+import { Api } from '../../../Hooks/CustomApiHook'
 
 const useStyles = makeStyles((theme) => ({
   media: {
@@ -32,17 +32,26 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AdminContent() {
   const classes = useStyles()
-  const { data, error, isLoading, products } = useFetch(PRODUCT_LIST, {
-    method: 'get',
-  })
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    setIsLoading(true)
+    Api.getProductList()
+      .then((el) => {
+        setData(el)
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false))
+  }, [])
 
   return (
     <React.Fragment>
       <Grid container className={classes.flexible}>
         <RespDialog />
         <Loader isLoading={isLoading}>
-          {!!products.length &&
-            products.map((data) => {
+          {!!data.length &&
+            data.map((data) => {
               return (
                 <Grid xs={12} md={4} key={data.id}>
                   <Card className={classes.padd}>

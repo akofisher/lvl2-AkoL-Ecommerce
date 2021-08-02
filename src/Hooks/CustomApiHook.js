@@ -1,47 +1,56 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
+import { serializeProductList } from './Serialize'
+import { serializeSingleProduct } from './Serialize'
+import { User } from '../store/UserProvider'
 
-export const useFetch = (url, options, body = null) => {
-  console.log(url, options, JSON.parse(body))
-  const [data, setData] = useState(null)
-  const [error, setError] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
-  const [products, setProducts] = useState([])
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true)
-      try {
-        const resp = await fetch(url, options, { body: body })
-        const data = await resp.json()
-        setData(data)
-
-        if (data.data) {
-          setProducts(
-            data.data.map((data) => {
-              return {
-                title: data.title,
-                price: data.price,
-                image: data.image,
-                id: data.id,
-              }
-            }),
-          )
-        } else {
-          setProducts({
-            title: data.title,
-            price: data.price,
-            image: data.image,
-            id: data.id,
-          })
-        }
-      } catch (e) {
-        setData([])
-        setError(e)
+export const Api = {
+  baseUrl: 'http://159.65.126.180/api/',
+  getData: function (url, params, method = 'get', confirmation) {
+    return fetch(this.baseUrl + url, {
+      method: method.toUpperCase(),
+      headers: {
+        'Content-Type': 'application/json',
+        accept: 'application/json',
+      },
+      body: JSON.stringify(params),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json()
+      } else {
+        throw new Error(res)
       }
-      setIsLoading(false)
-    }
+    })
+  },
+  getProductList: function (page) {
+    return Api.getData('products?page=' + page).then((json) => {
+      return serializeProductList(json.data)
+    })
+  },
 
-    fetchData()
-  }, [])
-  return { data, error, isLoading, products }
+  getSingleProduct: (id) => {
+    return Api.getData(`products/${id}`).then((json) => {
+      return serializeSingleProduct(json)
+    })
+  },
+  sighIn: function (email, password) {
+    return Api.getData('auth/login', { email, password }, 'POST')
+  },
+  sighUp: function (name, email, password, password_confirmation) {
+    return Api.getData(
+      'register',
+      { name, email, password, password_confirmation },
+      'POST',
+    )
+  },
+  privatePage: function () {
+    fetch(' http://159.65.126.180/api/auth/me', {
+      method: 'POST',
+      body: JSON.stringify({
+        access_token: User.token.access_token,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${User.token.access_token}`,
+      },
+    })
+  },
 }

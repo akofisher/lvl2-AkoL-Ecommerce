@@ -8,6 +8,9 @@ import AdminPanel from './adminPanel/adminPanel'
 import Login from './pages/login&signUp/login'
 import { SIGN_UP } from './routes'
 import SignUp from './pages/login&signUp/SingUp'
+import { PRIVATE } from './routes'
+import PrivateRoute from './store/PrivateRoute'
+import PrivatePage from './pages/PrivatePage/PrivatePage'
 
 function App() {
   return (
@@ -17,6 +20,7 @@ function App() {
         <Route path={LOGIN} component={Login} />
         <Route path={ADMIN_PANEL} component={AdminPanel} />
         <Route path={SINGLE_LIST} component={SecondBody} />
+        <PrivateRoute exact path={PRIVATE} component={PrivatePage} />
         <Route path={HOMEPAGE} component={Products} />
       </Switch>
     </Router>

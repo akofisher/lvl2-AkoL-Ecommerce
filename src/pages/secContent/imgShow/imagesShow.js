@@ -2,10 +2,10 @@ import React from 'react'
 import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core'
 import { Paper } from '@material-ui/core'
-import { useFetch } from '../../../Hooks/CustomApiHook'
 import { useParams } from 'react-router'
 import Loader from '../../content/RightSide/components/Loader'
-import { PRODUCT_LIST } from '../../../routes'
+import { useState, useEffect } from 'react'
+import { Api } from '../../../Hooks/CustomApiHook'
 
 const useStyles = makeStyles((theme) => ({
   img1: {
@@ -37,12 +37,21 @@ export default function ImagesShow() {
   const classes = useStyles()
   const { id } = useParams()
 
-  const { data, error, isLoading, products } = useFetch(
-    `${PRODUCT_LIST}/${id}`,
-    {
-      method: 'get',
-    },
-  )
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    setIsLoading(true)
+    Api.getSingleProduct(id)
+      .then((json) => {
+        setData(json)
+        console.log(json)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => setIsLoading(false))
+  }, [id])
 
   return (
     <React.Fragment>
@@ -51,7 +60,7 @@ export default function ImagesShow() {
           <Grid
             xs={12}
             className={classes.img1}
-            style={{ backgroundImage: `url("${products.image}")` }}
+            style={{ backgroundImage: `url("${data.image}")` }}
           ></Grid>
 
           <Grid container xs={12} className={classes.padd2}>
@@ -59,25 +68,25 @@ export default function ImagesShow() {
               item
               xs={3}
               className={classes.img}
-              style={{ backgroundImage: `url("${products.image}")` }}
+              style={{ backgroundImage: `url("${data.image}")` }}
             ></Paper>
             <Paper
               item
               xs={3}
               className={classes.img}
-              style={{ backgroundImage: `url("${products.image}")` }}
+              style={{ backgroundImage: `url("${data.image}")` }}
             ></Paper>
             <Paper
               item
               xs={3}
               className={classes.img}
-              style={{ backgroundImage: `url("${products.image}")` }}
+              style={{ backgroundImage: `url("${data.image}")` }}
             ></Paper>
             <Paper
               item
               xs={3}
               className={classes.img}
-              style={{ backgroundImage: `url("${products.image}")` }}
+              style={{ backgroundImage: `url("${data.image}")` }}
             ></Paper>
           </Grid>
         </Loader>

@@ -9,7 +9,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import { Link } from 'react-router-dom'
 import { HOMEPAGE, LOGIN, SIGN_UP } from '../../../routes'
 import { useContext } from 'react'
-import { UserContext } from '../../../store/UserContext'
+import { UserContext } from '../../../store/UserProvider'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,17 +42,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
   const classes = useStyles()
-
-  const { updateUser, user } = useContext(UserContext)
-
+  const userData = useContext(UserContext)
   const TOKEN = localStorage.getItem('token')
-  const userName = localStorage.getItem('userName')
-  const userEmail = localStorage.getItem('userEmail')
-  const userInformation = localStorage.getItem('user')
-
-  console.log(userInformation, TOKEN, 'USER')
-  updateUser(userInformation)
-  console.log(user, 'userLOG')
 
   return (
     <div className={classes.root}>
@@ -74,7 +65,7 @@ export default function ButtonAppBar() {
 
           {!!TOKEN == true ? (
             <React.Fragment>
-              <Button color="inherit">HELLO {userName} </Button>
+              <Button color="inherit">HELLO </Button>
               <Button
                 color="inherit"
                 onClick={() => {
