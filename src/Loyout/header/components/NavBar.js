@@ -29,6 +29,11 @@ const useStyles = makeStyles((theme) => ({
     border: '2px solid white',
     borderRadius: '20px',
   },
+  bTnN: {
+    color: 'blue',
+    fontWeight: 'bold',
+    fontSize: '17px',
+  },
   flexible: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -65,7 +70,9 @@ export default function ButtonAppBar() {
 
           {!!TOKEN == true ? (
             <React.Fragment>
-              <Button color="inherit">HELLO </Button>
+              <Button color="inherit" className={classes.bTnN}>
+                HELLO !{' '}
+              </Button>
               <Button
                 color="inherit"
                 onClick={() => {

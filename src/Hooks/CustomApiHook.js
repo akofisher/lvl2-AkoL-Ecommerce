@@ -10,13 +10,14 @@ export const Api = {
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify(params),
     }).then((res) => {
       if (res.ok) {
         return res.json()
       } else {
-        throw new Error(res)
+        throw new Error()
       }
     })
   },
@@ -42,15 +43,6 @@ export const Api = {
     )
   },
   privatePage: function () {
-    fetch(' http://159.65.126.180/api/auth/me', {
-      method: 'POST',
-      body: JSON.stringify({
-        access_token: User.token.access_token,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${User.token.access_token}`,
-      },
-    })
+    return Api.getData('auth/me', {}, 'post')
   },
 }

@@ -11,17 +11,48 @@ import SignUp from './pages/login&signUp/SingUp'
 import { PRIVATE } from './routes'
 import PrivateRoute from './store/PrivateRoute'
 import PrivatePage from './pages/PrivatePage/PrivatePage'
+import { Api } from './Hooks/CustomApiHook'
+import { useEffect } from 'react'
+import { UserContext } from './store/UserProvider'
+import { useContext } from 'react'
 
 function App() {
+  const userData = useContext(UserContext)
+  const isToken = () => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      userData.setData({
+        ...userData.data,
+        isLogedIn: false,
+      })
+      Api.privatePage()
+        .then((json) => {
+          userData.setData({
+            ...userData.data,
+            isLogedIn: true,
+            isLogedOut: false,
+            user: json,
+          })
+        })
+        .catch((error) => {
+          console.log(error)
+          localStorage.removeItem('token')
+        })
+    }
+  }
+
+  useEffect(() => {
+    isToken()
+  }, [])
   return (
     <Router>
       <Switch>
-        <Route path={SIGN_UP} component={SignUp} />
-        <Route path={LOGIN} component={Login} />
-        <Route path={ADMIN_PANEL} component={AdminPanel} />
-        <Route path={SINGLE_LIST} component={SecondBody} />
+        <Route exact path={SIGN_UP} component={SignUp} />
+        <Route exact path={LOGIN} component={Login} />
+        <Route exact path={ADMIN_PANEL} component={AdminPanel} />
+        <Route exact path={SINGLE_LIST} component={SecondBody} />
         <PrivateRoute exact path={PRIVATE} component={PrivatePage} />
-        <Route path={HOMEPAGE} component={Products} />
+        <Route exact path={HOMEPAGE} component={Products} />
       </Switch>
     </Router>
   )

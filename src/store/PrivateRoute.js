@@ -1,24 +1,27 @@
 import React, { useContext } from 'react'
 import { Route, Redirect, useLocation } from 'react-router-dom'
 import { UserContext } from './UserProvider'
-import { LOGIN } from '../routes'
+import { HOMEPAGE } from '../routes'
+import Loader from '../pages/content/RightSide/components/Loader'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const userData = useContext(UserContext)
-  let location = useLocation()
+  const USER = localStorage.getItem('token')
 
   return (
     <Route
       {...rest}
       render={(props) =>
-        userData.data.isLogedIn ? (
-          <Component {...props} />
+        userData.data.isLogedIn || USER ? (
+          <Loader>
+            <Component {...props} />
+          </Loader>
         ) : (
           <Redirect
             to={{
-              pathname: LOGIN,
+              pathname: HOMEPAGE,
               state: {
-                from: location,
+                from: props.location,
               },
             }}
           />

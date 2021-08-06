@@ -87,11 +87,11 @@ export default function Login() {
 
     validate,
     onSubmit: (values) => {
+      console.log(values, 'AKOOO96')
       Api.sighIn(formik.values.email, formik.values.password)
         .then((json) => {
-          localStorage.setItem('user', JSON.stringify(json))
           console.log(json, 'AKOOOOO')
-          localStorage.setItem('token', JSON.stringify(json.token.access_token))
+          localStorage.setItem('token', json.token.access_token)
           userData.setData({
             ...userData.data,
             isLogedIn: true,
@@ -105,12 +105,12 @@ export default function Login() {
         .catch((error) => {
           console.log(error, 'error')
         })
-      useEffect(() => {
-        userData.setData({
-          ...userData.data,
-          user: User.user,
-        })
-      }, [])
+      // useEffect(() => {
+      //   userData.setData({
+      //     ...userData.data,
+      //     user: User.user,
+      //   })
+      // }, [])
     },
   })
   return (
