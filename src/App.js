@@ -15,6 +15,8 @@ import { Api } from './Hooks/CustomApiHook'
 import { useEffect } from 'react'
 import { UserContext } from './store/UserProvider'
 import { useContext } from 'react'
+// import { Provider } from 'react-redux'
+// import store from './store/store'
 
 function App() {
   const userData = useContext(UserContext)
@@ -45,16 +47,20 @@ function App() {
     isToken()
   }, [])
   return (
-    <Router>
-      <Switch>
-        <Route exact path={SIGN_UP} component={SignUp} />
-        <Route exact path={LOGIN} component={Login} />
-        <Route exact path={ADMIN_PANEL} component={AdminPanel} />
-        <Route exact path={SINGLE_LIST} component={SecondBody} />
-        <PrivateRoute exact path={PRIVATE} component={PrivatePage} />
-        <Route exact path={HOMEPAGE} component={Products} />
-      </Switch>
-    </Router>
+    <React.Fragment>
+      {/* <Provider store={store}> */}
+      <Router>
+        <Switch>
+          <Route exact path={SIGN_UP} component={SignUp} />
+          <Route exact path={LOGIN} component={Login} />
+          <Route exact path={ADMIN_PANEL} component={AdminPanel} />
+          <Route exact path={SINGLE_LIST} component={SecondBody} />
+          <PrivateRoute exact path={PRIVATE} component={PrivatePage} />
+          <Route exact path={HOMEPAGE} component={Products} />
+        </Switch>
+      </Router>
+      {/* </Provider> */}
+    </React.Fragment>
   )
 }
 
