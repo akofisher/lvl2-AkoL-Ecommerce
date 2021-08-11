@@ -15,8 +15,9 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn'
 import InstagramIcon from '@material-ui/icons/Instagram'
 import ScrollToTop from '../../scroll'
 import { Api } from '../../Hooks/CustomApiHook'
-import { SIGN_UP } from '../../routes'
+import { LOGIN } from '../../routes'
 import { useHistory } from 'react-router'
+import Login from './login'
 
 const validate = (values) => {
   const errors = {}
@@ -106,7 +107,7 @@ export default function SignUp() {
       )
         .then((json) => {
           console.log(json)
-          history.push(SIGN_UP)
+          history.push(LOGIN)
         })
         .catch((error) => console.log(error, 'error'))
     },
