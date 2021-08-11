@@ -1,5 +1,5 @@
 import React from 'react'
-import Loyout from '../loyout/loyout'
+import Loyout from '../Loyout/Loyout'
 import ScrollToTop from '../scroll'
 import MainBody from './content/MainBody'
 

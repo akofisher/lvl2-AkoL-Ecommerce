@@ -8,7 +8,7 @@ import {
   makeStyles,
   Typography,
 } from '@material-ui/core'
-import Loyout from '../../loyout/loyout'
+import Loyout from '../../Loyout/Loyout'
 // import { UserContext } from '../../store/UserProvider'
 import { useSelector } from 'react-redux'
 import { selectLogedIn, selectUser } from '../../store/user/userSelector'

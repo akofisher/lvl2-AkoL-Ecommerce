@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core'
 import ImagesShow from './imgShow/imagesShow'
 import Titles from './titles/titles'
 import BottPanel from './bottomTitle/bottPanel'
-import Loyout from '../../loyout/loyout'
+import Loyout from '../../Loyout/Loyout'
 import ScrollToTop from '../../scroll'
 
 const useStyles = makeStyles((theme) => ({
