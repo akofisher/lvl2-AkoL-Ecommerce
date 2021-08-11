@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import {
   Box,
   Card,
@@ -9,7 +9,9 @@ import {
   Typography,
 } from '@material-ui/core'
 import Loyout from '../../loyout/loyout'
-import { UserContext } from '../../store/UserProvider'
+// import { UserContext } from '../../store/UserProvider'
+import { useSelector } from 'react-redux'
+import { selectLogedIn, selectUser } from '../../store/user/userSelector'
 
 const useStyles = makeStyles({
   root: {
@@ -20,31 +22,33 @@ const useStyles = makeStyles({
   },
 })
 const PrivatePage = () => {
-  const userData = useContext(UserContext)
+  // const userData = useContext(UserContext)
   const classes = useStyles()
+  const user = useSelector(selectUser)
+  const isLogedIn = useSelector(selectLogedIn)
 
   return (
     <React.Fragment>
-      {userData.data.isLogedIn ? (
+      {isLogedIn ? (
         <Loyout>
           <Box padding="70px ">
             <Card className={classes.root}>
               <CardActionArea>
                 <CardMedia
                   className={classes.media}
-                  image={userData.data.user.avatar}
+                  image={user.avatar}
                   title="Contemplative Reptile"
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
-                    {userData.data.user.name}
+                    {user.name}
                   </Typography>
                   <Typography
                     variant="body2"
                     color="textSecondary"
                     component="p"
                   >
-                    {userData.data.user.email}
+                    {user.email}
                   </Typography>
                 </CardContent>
               </CardActionArea>

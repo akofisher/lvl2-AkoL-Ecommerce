@@ -13,28 +13,27 @@ import PrivateRoute from './store/PrivateRoute'
 import PrivatePage from './pages/PrivatePage/PrivatePage'
 import { Api } from './Hooks/CustomApiHook'
 import { useEffect } from 'react'
-import { UserContext } from './store/UserProvider'
-import { useContext } from 'react'
-// import { Provider } from 'react-redux'
-// import store from './store/store'
+// import { UserContext } from './store/UserProvider'
+// import { useContext } from 'react'
+import { useDispatch } from 'react-redux'
+import { setUser, setLogedIn } from './store/user/userActionsCreator'
 
 function App() {
-  const userData = useContext(UserContext)
+  // const userData = useContext(UserContext)
+  let dispatch = useDispatch()
   const isToken = () => {
     const token = localStorage.getItem('token')
     if (token) {
-      userData.setData({
-        ...userData.data,
-        isLogedIn: false,
-      })
       Api.privatePage()
         .then((json) => {
-          userData.setData({
-            ...userData.data,
-            isLogedIn: true,
-            isLogedOut: false,
-            user: json,
-          })
+          // userData.setData({
+          //   ...userData.data,
+          //   isLogedIn: true,
+          //   isLogedOut: false,
+          //   user: json,
+          // })
+          dispatch(setLogedIn(true))
+          dispatch(setUser(json))
         })
         .catch((error) => {
           console.log(error)
@@ -46,9 +45,9 @@ function App() {
   useEffect(() => {
     isToken()
   }, [])
+
   return (
     <React.Fragment>
-      {/* <Provider store={store}> */}
       <Router>
         <Switch>
           <Route exact path={SIGN_UP} component={SignUp} />
@@ -59,7 +58,6 @@ function App() {
           <Route exact path={HOMEPAGE} component={Products} />
         </Switch>
       </Router>
-      {/* </Provider> */}
     </React.Fragment>
   )
 }

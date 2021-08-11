@@ -12,6 +12,9 @@ import Loader from './Loader'
 import { Link } from 'react-router-dom'
 import { SINGLE_LIST } from '../../../../routes'
 import { Api } from '../../../../Hooks/CustomApiHook'
+import { useDispatch, useSelector } from 'react-redux'
+import { setProducts } from '../../../../store/products/prodActionCreat'
+import { selectProducts } from '../../../../store/products/prodSelector'
 
 const useStyles = makeStyles((theme) => ({
   media: {
@@ -32,23 +35,26 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FakeStore() {
   const classes = useStyles()
-  const [data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
+  // const [data, setData] = useState([])
+  const [loading, setLoading] = useState(false)
+  const dispatch = useDispatch()
+  const data = useSelector(selectProducts)
 
   useEffect(() => {
-    setIsLoading(true)
+    setLoading(true)
     Api.getProductList()
-      .then((el) => {
-        setData(el)
+      .then((data) => {
+        // setData(el)
+        dispatch(setProducts(data))
       })
       .catch((err) => console.log(err))
-      .finally(() => setIsLoading(false))
+      .finally(() => setLoading(false))
   }, [])
 
   return (
     <React.Fragment>
       <Grid container className={classes.flexible}>
-        <Loader isLoading={isLoading}>
+        <Loader loading={loading}>
           {!!data.length &&
             data.map((data) => {
               return (

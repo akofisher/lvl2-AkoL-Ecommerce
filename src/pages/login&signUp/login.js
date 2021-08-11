@@ -18,11 +18,11 @@ import { SIGN_UP, HOMEPAGE } from '../../routes'
 import { Link as Rlink, Redirect, useHistory } from 'react-router-dom'
 import ScrollToTop from '../../scroll'
 import { Api } from '../../Hooks/CustomApiHook'
-import { User } from '../../store/UserProvider'
 import { PRIVATE } from '../../routes'
-import { useContext } from 'react'
-import { UserContext } from '../../store/UserProvider'
-import { useEffect } from 'react'
+// import { useContext } from 'react'
+// import { UserContext } from '../../store/UserProvider'
+import { useDispatch } from 'react-redux'
+import { setLogedIn, setUser } from '../../store/user/userActionsCreator'
 
 const validate = (values) => {
   const errors = {}
@@ -75,10 +75,10 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function Login() {
-  const userData = useContext(UserContext)
+  // const userData = useContext(UserContext)
   const history = useHistory()
   const classes = useStyles()
-
+  const dispatch = useDispatch()
   const formik = useFormik({
     initialValues: {
       password: '',
@@ -92,13 +92,14 @@ export default function Login() {
         .then((json) => {
           console.log(json, 'AKOOOOO')
           localStorage.setItem('token', json.token.access_token)
-          userData.setData({
-            ...userData.data,
-            isLogedIn: true,
-            isLogedOut: false,
-            user: json.user,
-          })
-
+          // userData.setData({
+          //   ...userData.data,
+          //   isLogedIn: true,
+          //   isLogedOut: false,
+          //   user: json.user,
+          // })
+          dispatch(setLogedIn(true))
+          dispatch(setUser(json.user))
           history.push(PRIVATE)
         })
 

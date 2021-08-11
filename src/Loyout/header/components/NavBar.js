@@ -7,9 +7,11 @@ import Button from '@material-ui/core/Button'
 import ControlledOpenSelect from './SelectFlag'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import { Link } from 'react-router-dom'
-import { HOMEPAGE, LOGIN, SIGN_UP } from '../../../routes'
-import { useContext } from 'react'
-import { UserContext } from '../../../store/UserProvider'
+import { HOMEPAGE, LOGIN, PRIVATE, SIGN_UP } from '../../../routes'
+// import { useContext } from 'react'
+// import { UserContext } from '../../../store/UserProvider'
+import { useSelector } from 'react-redux'
+import { selectLogedIn, selectUser } from '../../../store/user/userSelector'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,8 +49,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
   const classes = useStyles()
-  const userData = useContext(UserContext)
-  const TOKEN = localStorage.getItem('token')
+  // const userData = useContext(UserContext)
+  // const TOKEN = localStorage.getItem('token')
+  const isLogedIn = useSelector(selectLogedIn)
+  const user = useSelector(selectUser)
 
   return (
     <div className={classes.root}>
@@ -68,10 +72,15 @@ export default function ButtonAppBar() {
           </Button>
           <Button color="inherit">Contact</Button>
 
-          {!!TOKEN == true ? (
+          {isLogedIn ? (
             <React.Fragment>
-              <Button color="inherit" className={classes.bTnN}>
-                HELLO !{' '}
+              <Button
+                color="inherit"
+                className={classes.bTnN}
+                component={Link}
+                to={PRIVATE}
+              >
+                HELLO {user.name}
               </Button>
               <Button
                 color="inherit"
