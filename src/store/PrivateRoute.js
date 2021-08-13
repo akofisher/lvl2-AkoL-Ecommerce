@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { Route, Redirect, useLocation } from 'react-router-dom'
+import React from 'react'
+import { Route, Redirect} from 'react-router-dom'
 // import { UserContext } from './UserProvider'
 import { HOMEPAGE } from '../routes'
 import Loader from '../pages/content/RightSide/components/Loader'
