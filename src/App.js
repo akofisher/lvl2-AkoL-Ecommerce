@@ -17,33 +17,14 @@ import { useEffect } from 'react'
 // import { useContext } from 'react'
 import { useDispatch } from 'react-redux'
 import { setUser, setLogedIn } from './store/user/userActionsCreator'
+import { isToken } from './store/user/userActions'
 
 function App() {
   // const userData = useContext(UserContext)
   let dispatch = useDispatch()
-  const isToken = () => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      Api.privatePage()
-        .then((json) => {
-          // userData.setData({
-          //   ...userData.data,
-          //   isLogedIn: true,
-          //   isLogedOut: false,
-          //   user: json,
-          // })
-          dispatch(setLogedIn(true))
-          dispatch(setUser(json))
-        })
-        .catch((error) => {
-          console.log(error)
-          localStorage.removeItem('token')
-        })
-    }
-  }
 
   useEffect(() => {
-    isToken()
+    dispatch(isToken)
   }, [])
 
   return (
@@ -52,7 +33,7 @@ function App() {
         <Switch>
           <Route exact path={SIGN_UP} component={SignUp} />
           <Route exact path={LOGIN} component={Login} />
-          <Route exact path={ADMIN_PANEL} component={AdminPanel} />
+          <PrivateRoute exact path={ADMIN_PANEL} component={AdminPanel} />
           <Route exact path={SINGLE_LIST} component={SecondBody} />
           <PrivateRoute exact path={PRIVATE} component={PrivatePage} />
           <Route exact path={HOMEPAGE} component={Products} />
