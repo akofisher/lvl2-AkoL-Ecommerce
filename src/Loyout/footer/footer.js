@@ -1,6 +1,6 @@
 import React from 'react'
-import Informations from './components/Informations'
-import Social from './components/Social'
+import Informations from '../../Components/Informations'
+import Social from '../../Components/Social'
 
 export default function Footer() {
   return (

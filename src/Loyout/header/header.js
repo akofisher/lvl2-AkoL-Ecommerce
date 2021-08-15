@@ -1,6 +1,6 @@
 import React from 'react'
-import ButtonAppBar from './components/NavBar'
-import BackgroundImg from './components/BcgImg'
+import BackgroundImg from '../../Components/BcgImg'
+import ButtonAppBar from '../../Components/NavBar'
 
 export default function Header() {
   return (

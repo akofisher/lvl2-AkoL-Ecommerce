@@ -1,22 +1,24 @@
-import React from 'react'
-import './App.scss'
-import Products from './pages/products'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import SecondBody from './pages/secContent/secContent'
-import { HOMEPAGE, SINGLE_LIST, ADMIN_PANEL, LOGIN } from './routes'
-import AdminPanel from './adminPanel/adminPanel'
-import Login from './pages/login&signUp/login'
-import { SIGN_UP } from './routes'
-import SignUp from './pages/login&signUp/SingUp'
-import { PRIVATE } from './routes'
-import PrivateRoute from './store/PrivateRoute'
-import PrivatePage from './pages/PrivatePage/PrivatePage'
-import { Api } from './Hooks/CustomApiHook'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 // import { UserContext } from './store/UserProvider'
 // import { useContext } from 'react'
 import { useDispatch } from 'react-redux'
-import { setUser, setLogedIn } from './store/user/userActionsCreator'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import AdminPanel from './adminPanel/adminPanel'
+import './App.scss'
+import PrivatePage from './Components/PrivatePage'
+import PrivateRoute from './Components/PrivateRoute'
+import Login from './pages/login&signUp/login'
+import SignUp from './pages/login&signUp/SingUp'
+import Products from './pages/products'
+import SecondBody from './pages/secContent/secContent'
+import {
+  ADMIN_PANEL,
+  HOMEPAGE,
+  LOGIN,
+  PRIVATE,
+  SIGN_UP,
+  SINGLE_LIST,
+} from './routes'
 import { isToken } from './store/user/userActions'
 
 function App() {

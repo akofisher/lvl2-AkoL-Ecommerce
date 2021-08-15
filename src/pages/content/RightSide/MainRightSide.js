@@ -1,7 +1,7 @@
 import React from 'react'
-import TopLabel from './components/TopLabel'
-import FakeStore from './components/FetchStore'
-import BottLabel from './components/BottLabel'
+import BottLabel from '../../../Components/BottLabel'
+import TopLabel from '../../../Components/TopLabel'
+import FakeStore from './FetchStore'
 
 export default function MainRightSide() {
   return (

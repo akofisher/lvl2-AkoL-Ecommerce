@@ -1,12 +1,11 @@
-import React from 'react'
-import { Grid } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core'
-import Rating from '@material-ui/lab/Rating'
-import Typography from '@material-ui/core/Typography'
+import { Grid, makeStyles } from '@material-ui/core'
 import Box from '@material-ui/core/Box'
-import Quantity from './components/Quantity'
-import RadioSizes from './components/RadioSizes'
-import Buttons from './components/Buttons'
+import Typography from '@material-ui/core/Typography'
+import Rating from '@material-ui/lab/Rating'
+import React from 'react'
+import Buttons from '../../../Components/Buttons'
+import Quantity from '../../../Components/Quantity'
+import RadioSizes from '../../../Components/RadioSizes'
 
 const useStyles = makeStyles((theme) => ({
   Flex: {

@@ -1,5 +1,4 @@
-import { serializeProductList } from './Serialize'
-import { serializeSingleProduct } from './Serialize'
+import { serializeProductList, serializeSingleProduct } from './Serialize'
 
 export const Api = {
   baseUrl: 'http://159.65.126.180/api/',

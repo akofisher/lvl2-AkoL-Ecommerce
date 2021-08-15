@@ -1,8 +1,7 @@
+import { Grid, makeStyles } from '@material-ui/core'
 import React from 'react'
-import { Grid } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core'
-import Header from './header/header'
 import Footer from './footer/footer'
+import Header from './header/header'
 
 const useStyles = makeStyles((theme) => ({
   grid: {

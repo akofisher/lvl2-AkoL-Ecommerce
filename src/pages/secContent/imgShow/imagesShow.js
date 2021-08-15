@@ -1,10 +1,7 @@
-import React from 'react'
-import { Grid } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core'
-import { Paper } from '@material-ui/core'
+import { Grid, makeStyles, Paper } from '@material-ui/core'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import Loader from '../../content/RightSide/components/Loader'
-import { useState, useEffect } from 'react'
+import Loader from '../../../Components/Loader'
 import { Api } from '../../../Hooks/CustomApiHook'
 
 const useStyles = makeStyles((theme) => ({

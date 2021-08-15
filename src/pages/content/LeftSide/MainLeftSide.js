@@ -1,12 +1,12 @@
 import React from 'react'
-import FirstList from './components/FirstList'
-import SearchInp from './components/SearchInp'
-import CheckboxList from './components/CheckList'
-import RatingList from './components/RatingList'
-import RadioList from './components/RadioList'
-import PriceSlider from './components/PriceSlider'
-import SizeList from './components/SizeList'
-import ColoredCheckbox from './components/ColoredCheckbox'
+import CheckboxList from '../../../Components/CheckList'
+import ColoredCheckbox from '../../../Components/ColoredCheckbox'
+import FirstList from '../../../Components/FirstList'
+import PriceSlider from '../../../Components/PriceSlider'
+import RadioList from '../../../Components/RadioList'
+import RatingList from '../../../Components/RatingList'
+import SearchInp from '../../../Components/SearchInp'
+import SizeList from '../../../Components/SizeList'
 
 export default function MainLeftSide() {
   return (
