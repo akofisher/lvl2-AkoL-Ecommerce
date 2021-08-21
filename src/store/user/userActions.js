@@ -26,6 +26,6 @@ export const isToken = (dispatch) => {
   }
 }
 
-export const updateUserProfile = (currentUserId, values) => (dispatch) => {
-  Api.update(currentUserId, values).then((data) => dispatch(setUser(data)))
-}
+// export const updateUserProfile = (currentUserId, values) => (dispatch) => {
+//   Api.update(currentUserId, values).then((data) => dispatch(setUser(data)))
+// }

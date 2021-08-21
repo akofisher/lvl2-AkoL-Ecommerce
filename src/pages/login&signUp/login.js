@@ -87,7 +87,6 @@ export default function Login() {
 
     validate,
     onSubmit: (values) => {
-      console.log(values, 'AKOOO96')
       Api.sighIn(formik.values.email, formik.values.password)
         .then((json) => {
           // userData.setData({

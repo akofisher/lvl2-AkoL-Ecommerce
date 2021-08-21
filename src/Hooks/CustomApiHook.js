@@ -55,7 +55,7 @@ export const Api = {
     return Api.getData('auth/me', {}, 'post')
   },
 
-  update: function (id, newUser) {
-    return Api.getData(`users/${id}/update`, { newUser }, 'post', true)
+  update: function (id, avatar) {
+    return Api.getData(`users/${id}/update`, { avatar }, 'post', true)
   },
 }
