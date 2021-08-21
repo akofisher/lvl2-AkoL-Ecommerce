@@ -18,7 +18,11 @@ import { Api } from '../../Hooks/CustomApiHook'
 import Footer from '../../Loyout/footer/footer'
 import { PRIVATE, SIGN_UP } from '../../routes'
 import ScrollToTop from '../../scroll'
-import { setLogedIn, setUser } from '../../store/user/userActionsCreator'
+import {
+  setLoading,
+  setLogedIn,
+  setUser,
+} from '../../store/user/userActionsCreator'
 
 const validate = (values) => {
   const errors = {}
@@ -86,28 +90,28 @@ export default function Login() {
       console.log(values, 'AKOOO96')
       Api.sighIn(formik.values.email, formik.values.password)
         .then((json) => {
-          console.log(json, 'AKOOOOO')
-          localStorage.setItem('token', json.token.access_token)
           // userData.setData({
           //   ...userData.data,
           //   isLogedIn: true,
           //   isLogedOut: false,
           //   user: json.user,
           // })
-          dispatch(setLogedIn(true))
           dispatch(setUser(json.user))
+          dispatch(setLogedIn(true))
+          localStorage.setItem('token', json.token.access_token)
           history.push(PRIVATE)
         })
 
         .catch((error) => {
           console.log(error, 'error')
         })
-      // useEffect(() => {
-      //   userData.setData({
-      //     ...userData.data,
-      //     user: User.user,
-      //   })
-      // }, [])
+        // useEffect(() => {
+        //   userData.setData({
+        //     ...userData.data,
+        //     user: User.user,
+        //   })
+        // }, [])
+        .finally(() => setLoading(false))
     },
   })
   return (
