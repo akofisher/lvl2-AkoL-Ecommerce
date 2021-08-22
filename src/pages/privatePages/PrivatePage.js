@@ -12,18 +12,25 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Loader from '../../Components/Loader'
-import Loyout from '../../Loyout/Loyout'
+import ButtonAppBar from '../../Components/NavBar'
+import Footer from '../../Loyout/footer/footer'
 import { AVATAR_CHANGE } from '../../routes'
+import ScrollToTop from '../../scroll'
 import { selectLogedIn, selectUser } from '../../store/user/userSelector'
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 445,
+    margin: '100px auto',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
   },
   media: {
-    height: 340,
+    height: 440,
   },
   padd: {
-    margin: '20px 40px',
+    margin: '20px auto',
   },
   image: {
     width: 220,
@@ -46,7 +53,9 @@ const PrivatePage = () => {
     <React.Fragment>
       <Loader loading={loading}>
         {isLogedIn ? (
-          <Loyout>
+          <React.Fragment>
+            <ScrollToTop />
+            <ButtonAppBar />
             <Box padding="80px ">
               <Card className={classes.root}>
                 <CardActionArea>
@@ -64,18 +73,19 @@ const PrivatePage = () => {
                     </Typography>
                   </CardContent>
                 </CardActionArea>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.padd}
+                  component={Link}
+                  to={AVATAR_CHANGE}
+                >
+                  CHANGE AVATAR
+                </Button>
               </Card>
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.padd}
-                component={Link}
-                to={AVATAR_CHANGE}
-              >
-                CHANGE AVATAR
-              </Button>
             </Box>
-          </Loyout>
+            <Footer />
+          </React.Fragment>
         ) : (
           ''
         )}

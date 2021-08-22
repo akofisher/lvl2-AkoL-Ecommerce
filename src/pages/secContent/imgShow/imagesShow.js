@@ -42,7 +42,6 @@ export default function ImagesShow() {
     Api.getSingleProduct(id)
       .then((json) => {
         setData(json)
-        console.log(json)
       })
       .catch((err) => {
         console.log(err)

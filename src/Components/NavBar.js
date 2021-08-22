@@ -1,3 +1,4 @@
+import { Box } from '@material-ui/core'
 import AppBar from '@material-ui/core/AppBar'
 import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
@@ -45,12 +46,18 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     color: 'black',
   },
+  radd: {
+    borderRadius: '50%',
+    background: 'red',
+    width: '25px',
+    color: 'white',
+    fontWeight: 'bold',
+  },
 }))
 
 export default function ButtonAppBar() {
   const classes = useStyles()
-  // const userData = useContext(UserContext)
-  // const TOKEN = localStorage.getItem('token')
+
   const isLogedIn = useSelector(selectLogedIn)
   const user = useSelector(selectUser)
 
@@ -62,6 +69,7 @@ export default function ButtonAppBar() {
             MDB
           </Typography>
           <Button color="inherit">
+            <Box className={classes.radd}>0</Box>
             <ShoppingCartIcon />
           </Button>
           <Button color="inherit">

@@ -64,7 +64,7 @@ export default function AvatarChange() {
       dispatch(setUpdate(user.id, values.avatar)).then(() => {
         setTimeout(() => {
           history.push(PRIVATE)
-        }, 1500)
+        }, 500)
       })
     },
   })
