@@ -6,11 +6,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import Loader from '../../Components/Loader'
 import ButtonAppBar from '../../Components/NavBar'
-import { Api } from '../../Hooks/CustomApiHook'
 import Footer from '../../Loyout/footer/footer'
 import { PRIVATE } from '../../routes'
 import ScrollToTop from '../../scroll'
-import { setUser } from '../../store/user/userActionsCreator'
+import { setUpdate } from '../../store/user/userActions'
 import { selectLogedIn, selectUser } from '../../store/user/userSelector'
 
 const validate = (values) => {
@@ -62,14 +61,13 @@ export default function AvatarChange() {
       avatar: '',
     },
     onSubmit: (values) => {
-      Api.update(user.id, values.avatar).then((data) => {
-        dispatch(setUser(data))
-      })
+      dispatch(setUpdate(user.id, values.avatar))
       setTimeout(() => {
         history.push(PRIVATE)
       }, 1500)
     },
   })
+
   return (
     <React.Fragment>
       <Loader loading={loading}>
