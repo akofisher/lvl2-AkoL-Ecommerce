@@ -7,7 +7,6 @@ export const SET_USER = 'SET_USER'
 export const SET_LOGEDIN = 'SET_LOGEDIN'
 export const SET_TOKEN = 'SET_TOKEN'
 export const SET_LOADING = 'SET_LOADING'
-export const SET_UPDATE = 'SET_UPDATE'
 
 // CONSTs
 
@@ -28,11 +27,14 @@ export const isToken = (dispatch) => {
 }
 
 export const setUpdate = (currentUserId, values) => (dispatch) => {
-  Api.update(currentUserId, values)
-    .then((data) => dispatch(setUser(data)))
+  dispatch(setLoading(true))
+  return Api.update(currentUserId, values)
+    .then((data) => {
+      dispatch(setUser(data))
+      return data
+    })
     .catch((error) => {
       console.log(error)
-      localStorage.removeItem('token')
     })
     .finally(() => setLoading(false))
 }

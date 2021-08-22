@@ -61,10 +61,11 @@ export default function AvatarChange() {
       avatar: '',
     },
     onSubmit: (values) => {
-      dispatch(setUpdate(user.id, values.avatar))
-      setTimeout(() => {
-        history.push(PRIVATE)
-      }, 1500)
+      dispatch(setUpdate(user.id, values.avatar)).then(() => {
+        setTimeout(() => {
+          history.push(PRIVATE)
+        }, 1500)
+      })
     },
   })
 

@@ -1,7 +1,7 @@
 import {
   SET_LOADING,
   SET_LOGEDIN,
-  SET_TOKEN, SET_UPDATE, SET_USER
+  SET_TOKEN, SET_USER
 } from '../user/userActions'
 
 const initialState = {
@@ -33,11 +33,7 @@ export default function userReducer(state = initialState, action) {
         ...state,
         token: action.payload,
       }
-      case SET_UPDATE:
-      return {
-        ...state,
-        update: action.payload,
-      }
+      
     default:
       return state
   }
