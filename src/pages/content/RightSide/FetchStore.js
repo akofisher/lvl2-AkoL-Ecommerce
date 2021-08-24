@@ -1,22 +1,26 @@
-import { Grid } from '@material-ui/core'
+import { Button, Grid } from '@material-ui/core'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Loader from '../../../Components/Loader'
 import { Api } from '../../../Hooks/CustomApiHook'
 import { SINGLE_LIST } from '../../../routes'
-import { setProducts } from '../../../store/products/prodActionCreat'
+import {
+  addProducts,
+  setProducts,
+} from '../../../store/products/prodActionCreat'
 import { selectProducts } from '../../../store/products/prodSelector'
 
 const useStyles = makeStyles((theme) => ({
   media: {
-    height: 140,
+    height: 90,
   },
   flexible: {
     display: 'flex',
@@ -67,7 +71,7 @@ export default function FakeStore() {
                         image={data.image}
                         title={data.title}
                       />
-                      <CardContent>
+                      <CardContent className={classes.media}>
                         <Typography gutterBottom variant="p" component="p">
                           {data.title}
                         </Typography>
@@ -76,6 +80,17 @@ export default function FakeStore() {
                         </Typography>
                       </CardContent>
                     </CardActionArea>
+                    <Button
+                      variant="contained"
+                      color="default"
+                      className={classes.button}
+                      startIcon={<AddShoppingCartIcon />}
+                      onClick={() => {
+                        dispatch(addProducts(data.id))
+                      }}
+                    >
+                      ADD TO CART
+                    </Button>
                   </Card>
                 </Grid>
               )

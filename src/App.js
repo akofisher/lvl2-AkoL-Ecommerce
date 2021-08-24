@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import AdminPanel from './adminPanel/adminPanel'
 import './App.scss'
 import PrivateRoute from './Components/PrivateRoute'
+import CartBody from './pages/cartPage/cartLoyout'
 import Login from './pages/login&signUp/login'
 import SignUp from './pages/login&signUp/SingUp'
 import AvatarChange from './pages/privatePages/AvatarChange'
@@ -15,6 +16,7 @@ import SecondBody from './pages/secContent/secContent'
 import {
   ADMIN_PANEL,
   AVATAR_CHANGE,
+  CART_PAGE,
   HOMEPAGE,
   LOGIN,
   PRIVATE,
@@ -37,6 +39,7 @@ function App() {
         <Switch>
           <Route exact path={SIGN_UP} component={SignUp} />
           <Route exact path={LOGIN} component={Login} />
+          <Route exact path={CART_PAGE} component={CartBody} />
           <PrivateRoute exact path={ADMIN_PANEL} component={AdminPanel} />
           <PrivateRoute exact path={AVATAR_CHANGE} component={AvatarChange} />
           <Route exact path={SINGLE_LIST} component={SecondBody} />

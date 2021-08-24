@@ -10,7 +10,7 @@ import React from 'react'
 // import { UserContext } from '../../../store/UserProvider'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { HOMEPAGE, LOGIN, PRIVATE, SIGN_UP } from '../routes'
+import { CART_PAGE, HOMEPAGE, LOGIN, PRIVATE, SIGN_UP } from '../routes'
 import { selectLogedIn, selectUser } from '../store/user/userSelector'
 import ControlledOpenSelect from './SelectFlag'
 
@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
     width: '25px',
     color: 'white',
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 }))
 
@@ -68,7 +69,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             MDB
           </Typography>
-          <Button color="inherit">
+          <Button color="inherit" component={Link} to={CART_PAGE}>
             <Box className={classes.radd}>0</Box>
             <ShoppingCartIcon />
           </Button>
