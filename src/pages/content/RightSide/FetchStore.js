@@ -86,7 +86,7 @@ export default function FakeStore() {
                       className={classes.button}
                       startIcon={<AddShoppingCartIcon />}
                       onClick={() => {
-                        dispatch(addProducts(data.id))
+                        dispatch(addProducts(data))
                       }}
                     >
                       ADD TO CART

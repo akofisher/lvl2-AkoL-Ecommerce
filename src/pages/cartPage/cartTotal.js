@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@material-ui/core'
+import { Button, Grid, makeStyles, Typography } from '@material-ui/core'
 import React from 'react'
 
 const useStyles = makeStyles((theme) => ({
@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function cartTotal() {
+export default function CartTotal() {
   const classes = useStyles()
   return (
     <React.Fragment>
