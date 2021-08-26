@@ -1,21 +1,18 @@
-import { Button, Grid } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import CustomButton from '../../../Components/CustomButton'
 import Loader from '../../../Components/Loader'
 import { Api } from '../../../Hooks/CustomApiHook'
 import { SINGLE_LIST } from '../../../routes'
-import {
-  addProducts,
-  setProducts,
-} from '../../../store/products/prodActionCreat'
+import { setProducts } from '../../../store/products/prodActionCreat'
 import { selectProducts } from '../../../store/products/prodSelector'
 
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
     textAlign: 'center',
     height: '250px',
+    paddingBottom: '10px',
   },
 }))
 
@@ -80,17 +78,7 @@ export default function FakeStore() {
                         </Typography>
                       </CardContent>
                     </CardActionArea>
-                    <Button
-                      variant="contained"
-                      color="default"
-                      className={classes.button}
-                      startIcon={<AddShoppingCartIcon />}
-                      onClick={() => {
-                        dispatch(addProducts(data))
-                      }}
-                    >
-                      ADD TO CART
-                    </Button>
+                    <CustomButton />
                   </Card>
                 </Grid>
               )

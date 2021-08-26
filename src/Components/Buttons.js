@@ -1,9 +1,9 @@
-import { Button, makeStyles } from '@material-ui/core'
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
+import { Box, Button, makeStyles } from '@material-ui/core'
 import React from 'react'
+import CustomButton from './CustomButton'
 
 const useStyles = makeStyles((theme) => ({
-  button: {
+  buttoN: {
     margin: theme.spacing(4),
   },
 }))
@@ -13,17 +13,12 @@ export default function Buttons() {
 
   return (
     <React.Fragment>
-      <Button variant="contained" color="primary">
-        Buy Now
-      </Button>
-      <Button
-        variant="contained"
-        color="default"
-        className={classes.button}
-        startIcon={<AddShoppingCartIcon />}
-      >
-        ADD TO CART
-      </Button>
+      <Box>
+        <Button variant="contained" color="primary" className={classes.buttoN}>
+          Buy Now
+        </Button>
+        <CustomButton />
+      </Box>
     </React.Fragment>
   )
 }

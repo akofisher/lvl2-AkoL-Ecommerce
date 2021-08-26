@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core'
+import { Box, Grid } from '@material-ui/core'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
 import CardContent from '@material-ui/core/CardContent'
@@ -13,20 +13,29 @@ import Loader from '../../Components/Loader'
 import Quantity from '../../Components/Quantity'
 import { Api } from '../../Hooks/CustomApiHook'
 import { SINGLE_LIST } from '../../routes'
-import { addProducts, setProducts } from '../../store/products/prodActionCreat'
+import { setProducts } from '../../store/products/prodActionCreat'
+import { selectProducts } from '../../store/products/prodSelector'
 
 const useStyles = makeStyles((theme) => ({
   media: {
-    height: 90,
+    height: '25vh',
+    width: '35vw',
   },
   flexible: {
     display: 'flex',
     flexDirection: 'column',
   },
   padd: {
+    display: 'flex',
     margin: theme.spacing(2),
     textAlign: 'center',
-    height: '250px',
+    maxHeight: '300px',
+    width: '50vw',
+  },
+  fle: {
+    display: 'flex',
+    flexDirection: 'column',
+    margin: '50px 50px 0 0',
   },
 }))
 
@@ -35,7 +44,7 @@ export default function CartPage() {
   // const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
-  const data = useSelector(addProducts)
+  const data = useSelector(selectProducts)
 
   useEffect(() => {
     setLoading(true)
@@ -61,11 +70,7 @@ export default function CartPage() {
                       component={Link}
                       to={SINGLE_LIST.replace(':id', data.id)}
                     >
-                      <CardMedia
-                        className={classes.media}
-                        image={data.image}
-                        title={data.title}
-                      />
+                      <CardMedia className={classes.media} image={data.image} />
                       <CardContent className={classes.media}>
                         <Typography gutterBottom variant="p" component="p">
                           {data.title}
@@ -75,9 +80,10 @@ export default function CartPage() {
                         </Typography>
                       </CardContent>
                     </CardActionArea>
-
-                    <Quantity />
-                    <Delete />
+                    <Box className={classes.fle}>
+                      <Quantity />
+                      <Delete />
+                    </Box>
                   </Card>
                 </Grid>
               )
