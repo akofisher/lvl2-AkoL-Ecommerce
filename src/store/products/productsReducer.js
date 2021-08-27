@@ -1,8 +1,8 @@
 import {
-  ADD_PRODUCTS,
+  ADD_PRODUCT,
   ADJUST_QUANTITY,
   LOAD_CURRENT_ITEM,
-  REMOVE_PRODUCTS,
+  REMOVE_PRODUCT,
   SET_PRODUCTS,
 } from './prodActions'
 
@@ -19,30 +19,20 @@ export default function productsReducer(state = initialState, action) {
         ...state,
         products: action.payload,
       }
-    case ADD_PRODUCTS:
-      const item = state.products.find((prod) => prod.id === action.payload.id)
-      const inCart = state.cart.find((item) =>
-        item.id === action.payload.id ? true : false,
-      )
+    case ADD_PRODUCT:
+      return [...state.cartProducts, { ...action.payload.id, qty: 1 }]
+
+    case REMOVE_PRODUCT:
       return {
         ...state,
-        cart: inCart
-          ? state.cart.map((item) =>
-              item.id === action.payload.id
-                ? { ...item, qty: item.qty + 1 }
-                : item,
-            )
-          : [...state.cart, { ...item, qty: 1 }],
-      }
-    case REMOVE_PRODUCTS:
-      return {
-        ...state,
-        cart: state.cart.filter((item) => item.id !== action.payload.id),
+        cartProducts: state.cartProducts.filter(
+          (item) => item.id !== action.payload.id,
+        ),
       }
     case ADJUST_QUANTITY:
       return {
         ...state,
-        cart: state.cart.map((item) =>
+        cartProducts: state.cartProducts.map((item) =>
           item.id === action.payload.id
             ? { ...item, qty: action.payload.qty }
             : item,
