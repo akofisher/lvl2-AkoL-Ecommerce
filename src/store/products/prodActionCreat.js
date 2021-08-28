@@ -13,10 +13,10 @@ export const setProducts = (products) => {
   }
 }
 
-export const addProducts = (cartProducts) => {
+export const addProducts = (cartProducts, value) => {
   return {
     type: ADD_PRODUCT,
-    payload: cartProducts,
+    payload: { cartProducts, qty: value },
   }
 }
 

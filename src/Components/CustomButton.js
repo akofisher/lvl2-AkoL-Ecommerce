@@ -1,13 +1,12 @@
 import { Button } from '@material-ui/core'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addProducts } from '../store/products/prodActionCreat'
-import { addCartProducts } from '../store/products/prodSelector'
 
 export default function CustomButton({ data }) {
   const dispatch = useDispatch()
-  const inCart = useSelector(addCartProducts)
+
   return (
     <React.Fragment>
       <Button
@@ -22,7 +21,8 @@ export default function CustomButton({ data }) {
               id: data.id,
               image: data.image,
             }),
-          )
+          ),
+            console.log(data)
         }}
       >
         ADD TO CART

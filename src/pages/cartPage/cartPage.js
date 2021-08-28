@@ -5,8 +5,8 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Delete from '../../Components/Delete'
 import Quantity from '../../Components/Quantity'
@@ -39,8 +39,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CartPage() {
   const classes = useStyles()
   // const [data, setData] = useState([])
-  const [loading, setLoading] = useState(false)
-  const dispatch = useDispatch()
+
   const data = useSelector(addCartProducts)
 
   return (
@@ -49,19 +48,22 @@ export default function CartPage() {
         {!!data &&
           data.map((data) => {
             return (
-              <Grid xs={12} md={4} key={data.id}>
+              <Grid xs={12} md={4} key={data.cartProducts.id}>
                 <Card className={classes.padd}>
                   <CardActionArea
                     component={Link}
-                    to={SINGLE_LIST.replace(':id', data.id)}
+                    to={SINGLE_LIST.replace(':id', data.cartProducts.id)}
                   >
-                    <CardMedia className={classes.media} image={data.image} />
+                    <CardMedia
+                      className={classes.media}
+                      image={data.cartProducts.image}
+                    />
                     <CardContent className={classes.media}>
                       <Typography gutterBottom variant="p" component="p">
-                        {data.title}
+                        {data.cartProducts.title}
                       </Typography>
                       <Typography gutterBottom component="h2">
-                        {data.price}$
+                        {data.cartProducts.price}$
                       </Typography>
                     </CardContent>
                   </CardActionArea>
