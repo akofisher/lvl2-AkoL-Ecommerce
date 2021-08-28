@@ -11,6 +11,7 @@ const initialState = {
   cartProducts: [], //id,title,decr,price, img, qty
   currentItem: null,
 }
+let qty = []
 
 export default function productsReducer(state = initialState, action) {
   switch (action.type) {
@@ -20,7 +21,7 @@ export default function productsReducer(state = initialState, action) {
         products: action.payload,
       }
     case ADD_PRODUCT:
-      return [...state.cartProducts, { ...action.payload.id, qty: 1 }]
+      return [...state.cartProducts, [action.payload, (qty = 1)]]
 
     case REMOVE_PRODUCT:
       return {

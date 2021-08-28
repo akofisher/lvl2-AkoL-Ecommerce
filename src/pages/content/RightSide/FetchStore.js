@@ -78,7 +78,7 @@ export default function FakeStore() {
                         </Typography>
                       </CardContent>
                     </CardActionArea>
-                    <CustomButton />
+                    <CustomButton data={data} />
                   </Card>
                 </Grid>
               )

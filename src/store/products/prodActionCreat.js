@@ -13,38 +13,33 @@ export const setProducts = (products) => {
   }
 }
 
-export const addProducts = (data, value) => {
+export const addProducts = (cartProducts) => {
   return {
     type: ADD_PRODUCT,
-    payload: {
-      id: data,
-      qty: value,
-    },
+    payload: cartProducts,
   }
 }
 
-export const removeProducts = (data) => {
+export const removeProducts = (cartProducts) => {
   return {
     type: REMOVE_PRODUCT,
-    payload: {
-      id: data,
-    },
+    payload: cartProducts,
   }
 }
 
-export const adjustQty = (data, value) => {
+export const adjustQty = (cartProducts, value) => {
   return {
     type: ADJUST_QUANTITY,
     payload: {
-      id: data,
+      id: cartProducts,
       qty: value,
     },
   }
 }
 
-export const loadCurrentItem = (data) => {
+export const loadCurrentItem = (cartProducts) => {
   return {
     type: LOAD_CURRENT_ITEM,
-    payload: data,
+    payload: cartProducts,
   }
 }

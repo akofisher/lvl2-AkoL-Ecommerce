@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addProducts } from '../store/products/prodActionCreat'
 import { addCartProducts } from '../store/products/prodSelector'
 
-export default function CustomButton() {
+export default function CustomButton({ data }) {
   const dispatch = useDispatch()
   const inCart = useSelector(addCartProducts)
   return (
@@ -15,7 +15,14 @@ export default function CustomButton() {
         color="default"
         startIcon={<AddShoppingCartIcon />}
         onClick={() => {
-          dispatch(addProducts(inCart))
+          dispatch(
+            addProducts({
+              title: data.title,
+              price: data.price,
+              id: data.id,
+              image: data.image,
+            }),
+          )
         }}
       >
         ADD TO CART
