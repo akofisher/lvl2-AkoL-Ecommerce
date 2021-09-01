@@ -1,14 +1,13 @@
 import {
   ADD_PRODUCT,
   ADJUST_QUANTITY,
-  LOAD_CURRENT_ITEM,
   REMOVE_PRODUCT,
   SET_PRODUCTS,
 } from './prodActions'
 
 const initialState = {
-  products: [], //id,title,decr,price, img
-  cartProducts: [], //id,title,decr,price, img, qty
+  products: [], //id,title,price, img
+  cartProducts: [], //id,title,price, img, qty
   currentItem: null,
 }
 
@@ -22,7 +21,7 @@ export default function productsReducer(state = initialState, action) {
     case ADD_PRODUCT:
       return {
         ...state,
-        cartProducts: [...state.cartProducts, { ...action.payload, pty: 1 }],
+        cartProducts: [...state.cartProducts, { ...action.payload, qty: 1 }],
       }
 
     case REMOVE_PRODUCT:
@@ -41,11 +40,7 @@ export default function productsReducer(state = initialState, action) {
             : item,
         ),
       }
-    case LOAD_CURRENT_ITEM:
-      return {
-        ...state,
-        currentItem: action.payload,
-      }
+
     default:
       return state
   }

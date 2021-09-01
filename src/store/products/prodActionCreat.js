@@ -1,7 +1,6 @@
 import {
   ADD_PRODUCT,
   ADJUST_QUANTITY,
-  LOAD_CURRENT_ITEM,
   REMOVE_PRODUCT,
   SET_PRODUCTS,
 } from './prodActions'
@@ -13,10 +12,10 @@ export const setProducts = (products) => {
   }
 }
 
-export const addProducts = (cartProducts, value) => {
+export const addProducts = (cartProducts) => {
   return {
     type: ADD_PRODUCT,
-    payload: { cartProducts, qty: value },
+    payload: cartProducts,
   }
 }
 
@@ -34,12 +33,5 @@ export const adjustQty = (cartProducts, value) => {
       id: cartProducts,
       qty: value,
     },
-  }
-}
-
-export const loadCurrentItem = (cartProducts) => {
-  return {
-    type: LOAD_CURRENT_ITEM,
-    payload: cartProducts,
   }
 }

@@ -40,30 +40,27 @@ export default function CartPage() {
   const classes = useStyles()
   // const [data, setData] = useState([])
 
-  const data = useSelector(addCartProducts)
+  const inCart = useSelector(addCartProducts)
 
   return (
     <React.Fragment>
       <Grid container className={classes.flexible}>
-        {!!data &&
-          data.map((data) => {
+        {!!inCart &&
+          inCart.map((inCart) => {
             return (
-              <Grid xs={12} md={4} key={data.cartProducts.id}>
+              <Grid xs={12} md={4} key={inCart.id}>
                 <Card className={classes.padd}>
                   <CardActionArea
                     component={Link}
-                    to={SINGLE_LIST.replace(':id', data.cartProducts.id)}
+                    to={SINGLE_LIST.replace(':id', inCart.id)}
                   >
-                    <CardMedia
-                      className={classes.media}
-                      image={data.cartProducts.image}
-                    />
+                    <CardMedia className={classes.media} image={inCart.image} />
                     <CardContent className={classes.media}>
                       <Typography gutterBottom variant="p" component="p">
-                        {data.cartProducts.title}
+                        {inCart.title}
                       </Typography>
                       <Typography gutterBottom component="h2">
-                        {data.cartProducts.price}$
+                        {inCart.price}$
                       </Typography>
                     </CardContent>
                   </CardActionArea>
