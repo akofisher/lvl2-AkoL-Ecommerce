@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 import Delete from '../../Components/Delete'
 import Quantity from '../../Components/Quantity'
 import { SINGLE_LIST } from '../../routes'
-import { addCartProducts } from '../../store/products/prodSelector'
+import { getCartProducts } from '../../store/cart/cartSelector'
 
 const useStyles = makeStyles((theme) => ({
   media: {
@@ -40,13 +40,13 @@ export default function CartPage() {
   const classes = useStyles()
   // const [data, setData] = useState([])
 
-  const inCart = useSelector(addCartProducts)
+  const data = useSelector(getCartProducts)
 
   return (
     <React.Fragment>
       <Grid container className={classes.flexible}>
-        {!!inCart &&
-          inCart.map((inCart) => {
+        {!!data &&
+          data.map((inCart) => {
             return (
               <Grid xs={12} md={4} key={inCart.id}>
                 <Card className={classes.padd}>
@@ -66,7 +66,7 @@ export default function CartPage() {
                   </CardActionArea>
                   <Box className={classes.fle}>
                     <Quantity />
-                    <Delete />
+                    <Delete id={inCart.id} />
                   </Box>
                 </Card>
               </Grid>

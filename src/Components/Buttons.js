@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Buttons() {
+export default function Buttons({ data }) {
   const classes = useStyles()
 
   return (
@@ -17,7 +17,7 @@ export default function Buttons() {
         <Button variant="contained" color="primary" className={classes.buttoN}>
           Buy Now
         </Button>
-        <CustomButton />
+        <CustomButton data={data} />
       </Box>
     </React.Fragment>
   )

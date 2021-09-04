@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Titles() {
+export default function Titles({ data }) {
   const classes = useStyles()
   return (
     <React.Fragment>
@@ -98,7 +98,7 @@ export default function Titles() {
           </Grid>
         </Grid>
         <Box xs={12}>
-          <Buttons />
+          <Buttons data={data} />
         </Box>
       </Grid>
     </React.Fragment>

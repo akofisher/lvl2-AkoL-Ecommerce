@@ -2,7 +2,7 @@ import { Button } from '@material-ui/core'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { addProducts } from '../store/products/prodActionCreat'
+import { addProducts } from '../store/cart/cartActionCreat'
 
 export default function CustomButton({ data }) {
   const dispatch = useDispatch()
