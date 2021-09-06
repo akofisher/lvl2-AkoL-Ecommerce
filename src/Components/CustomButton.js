@@ -3,6 +3,7 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { addProducts } from '../store/cart/cartActionCreat'
+import { setCookie } from '../store/cookiesHelp'
 
 export default function CustomButton({ data }) {
   const dispatch = useDispatch()
@@ -22,7 +23,7 @@ export default function CustomButton({ data }) {
               image: data.image,
             }),
           ),
-            console.log(data)
+            setCookie('CART', [data.title, data.price, data.id, data.image])
         }}
       >
         ADD TO CART
