@@ -3,7 +3,7 @@ export function setCookie(cName, cValues, exdays) {
   d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000)
   let expires = 'expires=' + d.toUTCString()
 
-  document.cookie +=
+  document.cookie =
     cName + '=' + JSON.stringify(cValues) + ';' + expires + ';path=/'
 }
 

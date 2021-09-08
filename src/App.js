@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 // import { UserContext } from './store/UserProvider'
 // import { useContext } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import AdminPanel from './adminPanel/adminPanel'
 import './App.scss'
@@ -23,15 +23,23 @@ import {
   SIGN_UP,
   SINGLE_LIST,
 } from './routes'
+import { getCartProducts } from './store/cart/cartSelector'
+import { setCookie } from './store/cookiesHelp'
 import { isToken } from './store/user/userActions'
 
 function App() {
   // const userData = useContext(UserContext)
   let dispatch = useDispatch()
+  const inCart = useSelector(getCartProducts)
 
   useEffect(() => {
     dispatch(isToken)
   }, [])
+  useEffect(() => {
+    if (inCart.length > 0) {
+      setCookie('CART', inCart)
+    }
+  }, [inCart])
 
   return (
     <React.Fragment>

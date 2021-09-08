@@ -24,7 +24,7 @@ export default function cartReducer(state = initialState, action) {
       return {
         ...state,
         cartProducts: state.cartProducts.map((item) =>
-          item.id === action.payload.id
+          item.id === action.payload
             ? { ...item, qty: action.payload.qty }
             : item,
         ),

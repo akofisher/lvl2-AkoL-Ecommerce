@@ -14,11 +14,11 @@ export const removeProducts = (id) => {
   }
 }
 
-export const adjustQty = (cartProducts, value) => {
+export const adjustQty = (id, value) => {
   return {
     type: ADJUST_QUANTITY,
     payload: {
-      id: cartProducts,
+      id,
       qty: value,
     },
   }
