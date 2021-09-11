@@ -24,13 +24,14 @@ import {
   SINGLE_LIST,
 } from './routes'
 import { getCartProducts } from './store/cart/cartSelector'
-import { setCookie } from './store/cookiesHelp'
+import { getCookie, setCookie } from './store/cookiesHelp'
 import { isToken } from './store/user/userActions'
 
 function App() {
   // const userData = useContext(UserContext)
   let dispatch = useDispatch()
   const inCart = useSelector(getCartProducts)
+  let data = document.cookie
 
   useEffect(() => {
     dispatch(isToken)
@@ -40,6 +41,11 @@ function App() {
       setCookie('CART', inCart)
     }
   }, [inCart])
+  useEffect(() => {
+    let Data = getCookie('CART')
+
+    console.log(Data, 'AKOOOOO')
+  }, [data])
 
   return (
     <React.Fragment>
