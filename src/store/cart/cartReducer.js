@@ -1,4 +1,9 @@
-import { ADD_PRODUCT, ADJUST_QUANTITY, REMOVE_PRODUCT } from './cartActions'
+import {
+  ADD_PRODUCT,
+  REMOVE_PRODUCT,
+  SET_COOKIECART,
+  SET_QUANTITY,
+} from './cartActions'
 
 const initialState = {
   cartProducts: [],
@@ -20,14 +25,19 @@ export default function cartReducer(state = initialState, action) {
         ),
       }
 
-    case ADJUST_QUANTITY:
+    case SET_QUANTITY:
+      var data = [...state.cartProducts]
+      data.find((x) => x.id === action.payload.data.id).qty = action.payload.qty
+
       return {
         ...state,
-        cartProducts: state.cartProducts.map((item) =>
-          item.id === action.payload
-            ? { ...item, qty: action.payload.qty }
-            : item,
-        ),
+        cartProducts: [...data],
+      }
+
+    case SET_COOKIECART:
+      return {
+        ...state,
+        cartProducts: [...action.payload],
       }
 
     default:

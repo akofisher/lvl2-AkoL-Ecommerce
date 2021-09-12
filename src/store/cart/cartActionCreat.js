@@ -1,4 +1,9 @@
-import { ADD_PRODUCT, ADJUST_QUANTITY, REMOVE_PRODUCT } from './cartActions'
+import {
+  ADD_PRODUCT,
+  REMOVE_PRODUCT,
+  SET_COOKIECART,
+  SET_QUANTITY,
+} from './cartActions'
 
 export const addProducts = (cartProducts) => {
   return {
@@ -14,12 +19,16 @@ export const removeProducts = (id) => {
   }
 }
 
-export const adjustQty = (id, value) => {
+export const setCookieCart = (data) => {
   return {
-    type: ADJUST_QUANTITY,
-    payload: {
-      id,
-      qty: value,
-    },
+    type: SET_COOKIECART,
+    payload: data,
+  }
+}
+
+export const setQuantity = (data, qty) => {
+  return {
+    type: SET_QUANTITY,
+    payload: { data, qty },
   }
 }

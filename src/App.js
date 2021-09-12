@@ -23,29 +23,48 @@ import {
   SIGN_UP,
   SINGLE_LIST,
 } from './routes'
+import { addProducts } from './store/cart/cartActionCreat'
 import { getCartProducts } from './store/cart/cartSelector'
-import { getCookie, setCookie } from './store/cookiesHelp'
+import { getCookie } from './store/cookiesHelp'
 import { isToken } from './store/user/userActions'
+import { setLogedIn } from './store/user/userActionsCreator'
+import { selectLogedIn } from './store/user/userSelector'
 
 function App() {
   // const userData = useContext(UserContext)
   let dispatch = useDispatch()
   const inCart = useSelector(getCartProducts)
+  const isLogedIn = useSelector(selectLogedIn)
   let data = document.cookie
 
   useEffect(() => {
     dispatch(isToken)
-  }, [])
-  useEffect(() => {
-    if (inCart.length > 0) {
-      setCookie('CART', inCart)
+    if (isToken) {
+      dispatch(setLogedIn(true))
     }
-  }, [inCart])
+  }, [])
+  // useEffect(() => {
+  //   if (isLogedIn) {
+  //     setCookie('CART', inCart, 3)
+  //   }
+  // }, [inCart])
   useEffect(() => {
     let Data = getCookie('CART')
+    let cartData = JSON.parse(Data)
+    if (cartData.length > 0) {
+      let inTheCart = cartData.map((datachka) => datachka)
+      dispatch(
+        addProducts({
+          title: inTheCart.title,
+          price: inTheCart.price,
+          id: inTheCart.id,
+          image: inTheCart.image,
+        }),
+      )
+    }
 
-    console.log(Data, 'AKOOOOO')
-  }, [data])
+    console.log(cartData, 'AKOOOOO')
+  }, [])
 
   return (
     <React.Fragment>
