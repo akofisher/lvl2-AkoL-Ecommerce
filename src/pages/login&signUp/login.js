@@ -110,7 +110,9 @@ export default function Login() {
         //     user: User.user,
         //   })
         // }, [])
-        .finally(() => setLoading(false))
+        .finally(() => {
+          setLoading(false)
+        })
     },
   })
   return (

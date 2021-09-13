@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import AdminPanel from './adminPanel/adminPanel'
 import './App.scss'
 import PrivateRoute from './Components/PrivateRoute'
+import { serializeCart } from './Hooks/Serialize'
 import CartBody from './pages/cartPage/cartLoyout'
 import Login from './pages/login&signUp/login'
 import SignUp from './pages/login&signUp/SingUp'
@@ -23,11 +24,9 @@ import {
   SIGN_UP,
   SINGLE_LIST,
 } from './routes'
-import { addProducts } from './store/cart/cartActionCreat'
-import { getCartProducts } from './store/cart/cartSelector'
-import { getCookie } from './store/cookiesHelp'
+import { setCookieCart } from './store/cart/cartActionCreat'
+import { getCartCookie, getCartProducts } from './store/cart/cartSelector'
 import { isToken } from './store/user/userActions'
-import { setLogedIn } from './store/user/userActionsCreator'
 import { selectLogedIn } from './store/user/userSelector'
 
 function App() {
@@ -35,36 +34,22 @@ function App() {
   let dispatch = useDispatch()
   const inCart = useSelector(getCartProducts)
   const isLogedIn = useSelector(selectLogedIn)
-  let data = document.cookie
 
   useEffect(() => {
     dispatch(isToken)
-    if (isToken) {
-      dispatch(setLogedIn(true))
-    }
   }, [])
-  // useEffect(() => {
-  //   if (isLogedIn) {
-  //     setCookie('CART', inCart, 3)
-  //   }
-  // }, [inCart])
-  useEffect(() => {
-    let Data = getCookie('CART')
-    let cartData = JSON.parse(Data)
-    if (cartData.length > 0) {
-      let inTheCart = cartData.map((datachka) => datachka)
-      dispatch(
-        addProducts({
-          title: inTheCart.title,
-          price: inTheCart.price,
-          id: inTheCart.id,
-          image: inTheCart.image,
-        }),
-      )
-    }
 
-    console.log(cartData, 'AKOOOOO')
-  }, [])
+  useEffect(() => {
+    if (isLogedIn && document.cookie.length > 0) {
+      dispatch(setCookieCart(JSON.parse(getCartCookie('Cart'))))
+    }
+  }, [isLogedIn])
+
+  useEffect(() => {
+    if (isLogedIn) {
+      document.cookie = `Cart=${JSON.stringify(serializeCart(inCart))}`
+    }
+  }, [inCart])
 
   return (
     <React.Fragment>

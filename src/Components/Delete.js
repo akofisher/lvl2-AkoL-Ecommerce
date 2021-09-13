@@ -5,9 +5,6 @@ import { useDispatch } from 'react-redux'
 import { removeProducts } from '../store/cart/cartActionCreat'
 
 const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(3),
-  },
   fnt: {
     fontSize: '20px',
     color: 'gray',
@@ -22,7 +19,6 @@ export default function Delete({ id }) {
     <React.Fragment>
       <IconButton
         aria-label="delete"
-        className={classes.margin}
         onClick={() => {
           dispatch(removeProducts(id))
         }}
