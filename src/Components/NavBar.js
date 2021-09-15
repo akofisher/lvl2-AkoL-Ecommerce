@@ -11,6 +11,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { CART_PAGE, HOMEPAGE, LOGIN, PRIVATE, SIGN_UP } from '../routes'
+import { getCartProducts } from '../store/cart/cartSelector'
 import { selectLogedIn, selectUser } from '../store/user/userSelector'
 import ControlledOpenSelect from './SelectFlag'
 
@@ -58,9 +59,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
   const classes = useStyles()
-
   const isLogedIn = useSelector(selectLogedIn)
   const user = useSelector(selectUser)
+  const data = useSelector(getCartProducts)
 
   return (
     <div className={classes.root}>
@@ -70,7 +71,7 @@ export default function ButtonAppBar() {
             MDB
           </Typography>
           <Button color="inherit" component={Link} to={CART_PAGE}>
-            <Box className={classes.radd}>0</Box>
+            <Box className={classes.radd}>{data.length}</Box>
             <ShoppingCartIcon />
           </Button>
           <Button color="inherit">

@@ -28,6 +28,7 @@ export default function CustomButton({ data }) {
                 price: data.price,
                 id: data.id,
                 image: data.image,
+                qty: 1,
               }),
             )
           }}

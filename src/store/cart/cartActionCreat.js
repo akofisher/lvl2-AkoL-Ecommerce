@@ -5,10 +5,11 @@ import {
   SET_QUANTITY,
 } from './cartActions'
 
-export const addProducts = (cartProducts) => {
+export const addProducts = (cartProducts, qty) => {
   return {
     type: ADD_PRODUCT,
     payload: cartProducts,
+    qty,
   }
 }
 
