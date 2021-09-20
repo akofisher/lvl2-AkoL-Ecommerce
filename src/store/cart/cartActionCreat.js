@@ -27,9 +27,9 @@ export const setCookieCart = (data) => {
   }
 }
 
-export const setQuantity = (data, qty) => {
+export const setQuantity = (cartProducts, qty) => {
   return {
     type: SET_QUANTITY,
-    payload: { data, qty },
+    payload: { cartProducts, qty },
   }
 }

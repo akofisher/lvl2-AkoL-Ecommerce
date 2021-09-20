@@ -1,5 +1,4 @@
 export const ADD_PRODUCT = 'ADD_PRODUCT'
 export const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
-
 export const SET_COOKIECART = 'SET_COOKIECART'
 export const SET_QUANTITY = 'SET_QUANTITY'
